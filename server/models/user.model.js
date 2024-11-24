@@ -6,9 +6,12 @@ const userSchema = new mongoose.Schema({
   lastName: { type: 'string', required: true },
   email: { type: 'string', required: true, unique: true },
   password: { type: 'string', required: true },
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+  // posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+  // comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   // friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Friends' }],
+},
+  {
+  timestamps: true,
 });
 
 
