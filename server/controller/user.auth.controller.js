@@ -37,12 +37,33 @@ const register = async (req, res) => {
 // login user 
 
 const login = async (req, res) => {
-  try {
-
-  } catch (error) {
-
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json('Process failed: Incomplete data')
   }
-}
+  try {
+    const user = await User.findOne({ email })
+    if (!user) return res.status(404).json('Process failed: User not found')
+    
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) return res.status(401).json('Process failed: Invalid credentials')
+    
+    
+   
+    const payload = {
+      _id: user._id,
+      email: user.email,
+      role: user.role,
+      iat: Math.floor(Date.now() / 1000), // Fecha de creación del token en segundos
+      exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7) // Fecha de expiración del token en 7 días
+    };
+
+    const token = jwt.encode(payload, process.env.SECRET_KEY);
+    return res.status(200).json({ message: 'User logged in', token })
+  } catch (error) {
+    res.status(500).json('Error Loggin In:', error.message)
+  }
+};
 
 export {
   register,
