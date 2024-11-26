@@ -8,6 +8,8 @@ const postRoute = express.Router();
 // create a post with auth validation middleware  to get user id 
 postRoute.post('/post', isAuth, multerErrorHandler(uploadFiles), postController.createPost);
 
+// add a comment to the post
+
 // get all posts
 postRoute.get('/post',isAuth,isAdmin, postController.getAllPosts);
 
