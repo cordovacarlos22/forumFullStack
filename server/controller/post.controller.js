@@ -43,10 +43,12 @@ const createPost = async (req, res) => {
 };
 
 const getAllPosts = async (req, res) => {
+
   try {
-    
+    const post = await Post.find({ isActive: true }).populate("author", "_id firstName lastName "); // Populate  the id and  name ;
+    res.status(200).json(post)
   } catch (error) {
-    
+    res.status(400).json({ message: error.message })
   }
 }
 
