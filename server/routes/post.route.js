@@ -1,7 +1,8 @@
 import express from 'express'
 import * as postController from '../controller/post.controller.js'
 import { isAuth } from '../middlewares/isAuth.js';
-import { uploadFiles,multerErrorHandler } from '../middlewares/multerUploadFile.midleware.js';
+import { isAdmin } from '../middlewares/isAdmin.js';
+import { uploadFiles, multerErrorHandler } from '../middlewares/multerUploadFile.midleware.js';
 const postRoute = express.Router();
 
 // create a post with auth validation middleware  to get user id 
@@ -12,6 +13,12 @@ postRoute.get('/post', postController.getAllPosts);
 
 // get post by id
 postRoute.get('/post/:postId', postController.getPostById);
+
+// update post by id with auth validation middleware
+postRoute.put('/post/:postId', isAuth, postController.updatePostById);
+
+// delete post by id with auth validation middleware
+postRoute.delete('/post/:postId', isAuth, isAdmin, postController.deletePostById);
 
 
 export default postRoute
