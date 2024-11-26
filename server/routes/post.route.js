@@ -10,5 +10,8 @@ postRoute.post('/post', isAuth, multerErrorHandler(uploadFiles), postController.
 // get all posts
 postRoute.get('/post', postController.getAllPosts);
 
+// get post by id
+postRoute.get('/post/:postId', postController.getPostById);
+
 
 export default postRoute
