@@ -77,7 +77,7 @@ const updatePostById = async (req, res) => {
     return res.status(400).json({ message: 'Invalid post ID' })
   };
   try {
-    const post = await Post.findOneAndUpdate(req.params.postId, req.body, { new: true })
+    const post = await Post.findByIdAndUpdate(req.params.postId, req.body, { new: true })
       .populate("author", "_id firstName lastName "); // Populate  the id and  name ;
     if (!post) return res.status(404).json({ message: "No post found!, please try again" })
     res.status(200).json({ post: post });
@@ -93,7 +93,7 @@ const deletePostById = async (req, res) => {
   };
 
   try {
-    const post = await Book.findByIdAndUpdate(req.params.postId, { isActive: false }, { new: false })
+    const post = await Post.findByIdAndUpdate(req.params.postId, { isActive: false }, { new: false })
     if (!post || !post.isActive) {
       return res.status(404).json({ message: 'Post not found' })
     };
