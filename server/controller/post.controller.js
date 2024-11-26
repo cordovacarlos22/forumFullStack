@@ -56,7 +56,7 @@ const getAllPosts = async (req, res) => {
 
 const getPostById = async (req, res) => {
 
-  // Valido que el ID sea un ObjectID de MongoDB (24 caracteres alfanuméricos en hexadecimal)
+  // check to see if ID is a matching with a matching object(has to be 24  hexadecimal  alphanumeric characters)
   if (!req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
     return res.status(400).json({ message: 'Invalid post ID' })
   }
@@ -72,18 +72,34 @@ const getPostById = async (req, res) => {
 };
 
 const updatePostById = async (req, res) => {
+  // check to see if ID is a matching with a matching object(has to be 24  hexadecimal  alphanumeric characters)
+  if (!req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
+    return res.status(400).json({ message: 'Invalid post ID' })
+  };
   try {
-
+    const post = await Post.findOneAndUpdate(req.params.postId, req.body, { new: true })
+      .populate("author", "_id firstName lastName "); // Populate  the id and  name ;
+    if (!post) return res.status(404).json({ message: "No post found!, please try again" })
+    res.status(200).json({ post: post });
   } catch (error) {
-
+    res.status(400).json({ message: error.message })
   }
 };
 
 const deletePostById = async (req, res) => {
+  // check to see if ID is a matching with a matching object(has to be 24  hexadecimal  alphanumeric characters)
+  if (!req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
+    return res.status(400).json({ message: 'Invalid post ID' })
+  };
+
   try {
-
+    const post = await Book.findByIdAndUpdate(req.params.bookId, { isActive: false }, { new: false })
+    if (!post || !post.isActive) {
+      return res.status(404).json({ message: 'Post not found' })
+    };
+    return res.status(204).end() 
   } catch (error) {
-
+    res.status(400).json({ message: error.message })
   }
 };
 
