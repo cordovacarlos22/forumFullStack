@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const forumSchema = new mongoose.Schema(
   {
     title: { type: String, required: true }, // Título del foro
-    description: { type: String, required:true }, // Descripción del foro
+    description: { type: String, required: true }, // Descripción del foro
+    category: { type: String, required: true },
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,
