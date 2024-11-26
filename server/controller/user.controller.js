@@ -27,7 +27,7 @@ const getUserById = async (res, req) => {
   }
 };
 
-const updateUser = async (res, req) => {
+const updateUserById = async (res, req) => {
   if (!req.params.userId.match(/^[0-9a-fA-F]{24}$/)) {
     return res.status(400).json({ message: "Invalid user ID" });
   }
@@ -42,7 +42,7 @@ const updateUser = async (res, req) => {
   }
 };
 
-const deleteUser = async (res, req) => {
+const deleteUserById = async (res, req) => {
   if (!req.params.userId.match(/^[0-9a-fA-F]{24}$/)) {
     return res.status(400).json({ message: "Invalid user ID" });
   }
@@ -55,4 +55,4 @@ const deleteUser = async (res, req) => {
   }
 };
 
-export { getAllUser, getUserById, updateUser, deleteUser };
+export { getAllUser, getUserById, updateUserById, deleteUserById };
