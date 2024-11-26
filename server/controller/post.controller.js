@@ -2,6 +2,7 @@ import Post from "../models/post.model.js";
 import s3UploadV3 from "../config/s3Service.js";
 import Forum from "../models/forum.model.js";
 
+
 // Create a new post
 const createPost = async (req, res) => {
   const { title, content, forumId } = req.body; // Expect `forumId` in the request body
@@ -55,10 +56,11 @@ const createPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
 
   try {
-    const posts = await Post.find({ isActive: true }).populate("author", "_id firstName lastName "); // Populate  the id and  name ;
+    const posts = await Post.find({ isActive: true }).populate("author", "_id firstName lastName ")
+      .populate("comments","content"); // Populate  the id and  name ;
     if (!posts) return res.status(404).json({ message: "No posts were found!, please try again" })
 
-    res.status(200).json(post)
+    res.status(200).json(posts)
   } catch (error) {
     res.status(400).json({ message: error.message })
   }
@@ -73,7 +75,8 @@ const getPostById = async (req, res) => {
 
   try {
     const post = await Post.find({ _id: req.params.postId, isActive: true })
-      .populate("author", "_id firstName lastName "); // Populate  the id and  name ;
+      .populate("author", "_id firstName lastName ") // Populate  the id and  name ;
+      .populate("comments", "content");
     if (!post) return res.status(404).json({ message: "No post found!, please try again" })
     res.status(200).json({ post: post });
   } catch (error) {
