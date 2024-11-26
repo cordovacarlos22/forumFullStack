@@ -93,7 +93,7 @@ const deletePostById = async (req, res) => {
   };
 
   try {
-    const post = await Book.findByIdAndUpdate(req.params.bookId, { isActive: false }, { new: false })
+    const post = await Book.findByIdAndUpdate(req.params.postId, { isActive: false }, { new: false })
     if (!post || !post.isActive) {
       return res.status(404).json({ message: 'Post not found' })
     };
