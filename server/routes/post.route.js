@@ -9,7 +9,7 @@ const postRoute = express.Router();
 postRoute.post('/post', isAuth, multerErrorHandler(uploadFiles), postController.createPost);
 
 // get all posts
-postRoute.get('/post', postController.getAllPosts);
+postRoute.get('/post',isAuth,isAdmin, postController.getAllPosts);
 
 // get post by id
 postRoute.get('/post/:postId', postController.getPostById);
