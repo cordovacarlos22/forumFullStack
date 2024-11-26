@@ -15,10 +15,10 @@ postRoute.get('/post', postController.getAllPosts);
 postRoute.get('/post/:postId', postController.getPostById);
 
 // update post by id with auth validation middleware
-postRoute.put('/post/:postId', isAuth, postController.updatePostById);
+postRoute.patch('/post/:postId',isAuth,isAdmin,  postController.updatePostById);
 
 // delete post by id with auth validation middleware
-postRoute.delete('/post/:postId', isAuth, isAdmin, postController.deletePostById);
+postRoute.delete('/post/:postId', postController.deletePostById);
 
 
 export default postRoute
