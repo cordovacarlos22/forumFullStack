@@ -1,43 +1,53 @@
 import Post from "../models/post.model.js";
 import s3UploadV3 from "../config/s3Service.js";
+import Forum from "../models/forum.model.js";
 
 // Create a new post
 const createPost = async (req, res) => {
+  const { title, content, forumId } = req.body; // Expect `forumId` in the request body
 
-  // Validate that user provides with the required information
-  const { title, content } = req.body;
-
-  if (!title || !content) {
-    return res.status(400).json('Process failed: Incomplete data')
+  // Validate required data
+  if (!title || !content || !forumId) {
+    return res.status(400).json({
+      message: "Process failed: Missing required data (title, content, or forumId)",
+    });
   }
 
   if (!req.files) {
-
-    return res.status(400).json({ message: 'No file uploaded' });
-  };
+    return res.status(400).json({ message: "No file uploaded" });
+  }
 
   try {
-    const result = await s3UploadV3(req.files); // function takes files and uploads them to s3 
+    // Upload files to S3
+    const result = await s3UploadV3(req.files); // Upload files and get their URLs
 
+    // Verify the forum exists
+    const forum = await Forum.findById(forumId);
+    if (!forum) {
+      return res.status(404).json({ message: "Forum not found" });
+    }
 
+    // Create the post
     const post = await Post.create({
       ...req.body,
-      image: result.urls, // Guarda las URLs en el campo `image`
-      author: req.userId, // Obtener ID del usuario desde el token
+      image: result.urls, // Store the image URLs
+      author: req.userId, // User ID from the authenticated token
     });
 
+    // Add the post ID to the forum's posts array
+    forum.posts.push(post._id);
+    await forum.save();
 
-    // Populate the author field with user details
+    // Populate the post's author field
     const populatedPost = await Post.findById(post._id)
-      .populate("author", "_id firstName lastName "); // Populate  the id and  name 
-
+      .populate("author", "_id firstName lastName"); // Populate author details
 
     res.status(201).json({
       message: "Post created successfully",
       post: populatedPost,
     });
-
   } catch (error) {
+    console.error("Error creating post:", error);
     res.status(500).json({ error: "Internal Server Error", details: error.message });
   }
 };
