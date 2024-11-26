@@ -3,6 +3,7 @@ import { connect } from './config/database.js'
 import userRoutes from './routes/user.route.js'
 import postRoute from './routes/post.route.js'
 import forumRoutes from './routes/forum.route.js'
+import commentRoutes from './routes/comment.route.js'
 
 const PORT = process.env.PORT || 3000
 
@@ -15,6 +16,8 @@ api.use('/api/v1', userRoutes);
 api.use('/api/v1', postRoute);
 
 api.use('/api/v1', forumRoutes);
+
+api.use('/api/v1', commentRoutes);
 
 connect().then(() => {
     api.listen(PORT, () => {
