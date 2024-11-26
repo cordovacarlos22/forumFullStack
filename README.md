@@ -36,7 +36,9 @@ nodemon ( dev) --- instalado
 Env --- instalado
 Render -- pendiente
 socketIO - chat en tiempo real --- pendiente
-
+@aws-sdk/client-s3
+multer 
+uuid 
 
 
 Esquema 
