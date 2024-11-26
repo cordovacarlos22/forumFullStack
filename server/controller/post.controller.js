@@ -3,7 +3,14 @@ import s3UploadV3 from "../config/s3Service.js";
 
 // Create a new post
 const createPost = async (req, res) => {
-  
+
+  // Validate that user provides with the required information
+  const { title, content } = req.body;
+
+  if (!title ||!content) {
+    return res.status(400).json('Process failed: Incomplete data')
+  }
+
   if (!req.files) {
 
     return res.status(400).json({ message: 'No file uploaded' });
