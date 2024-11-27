@@ -73,32 +73,32 @@ AWS_BUCKET_NAME=<your-s3-bucket-name>
 ## API Endpoints
 
 ### Users
-- **POST** `/user/register`: Register a new user.
-- **POST** `/user/login`: Login a user.
-- **GET** `/user`: Get all users (admin-only).
-- **GET** `/user/:userId`: Get user by ID (admin-only).
-- **PATCH** `/user/:userId`: Update user by ID.
-- **DELETE** `/user/:userId`: Delete user by ID (admin-only).
+- **POST** `api/v1/user/register`: Register a new user.
+- **POST** `api/v1/user/login`: Login a user.
+- **GET** `api/v1/user`: Get all users (admin-only).
+- **GET** `api/v1/user/:userId`: Get user by ID (admin-only).
+- **PATCH** `api/v1/user/:userId`: Update user by ID.
+- **DELETE** `api/v1/user/:userId`: Delete user by ID (admin-only).
 
 ### Posts
-- **POST** `/post`: Create a new post (with authentication and file upload).
-- **GET** `/post`: Get all posts (admin-only).
-- **GET** `/post/:postId`: Get post by ID.
-- **PATCH** `/post/:postId`: Update post by ID.
-- **DELETE** `/post/:postId`: Delete post by ID.
+- **POST** `api/v1/post`: Create a new post (with authentication and file upload).
+- **GET** `api/v1/post`: Get all posts (admin-only).
+- **GET** `api/v1/post/:postId`: Get post by ID.
+- **PATCH** `api/v1/post/:postId`: Update post by ID.
+- **DELETE** `api/v1/post/:postId`: Delete post by ID.
 
 ### Forums
-- **POST** `/forum`: Create a new forum.
-- **GET** `/forum`: Get all forums (admin-only).
-- **GET** `/forum/:forumId`: Get forum by ID.
-- **PATCH** `/forum/:forumId`: Update forum by ID.
-- **DELETE** `/forum/:forumId`: Delete forum by ID.
+- **POST** `api/v1/forum`: Create a new forum.
+- **GET** `api/v1/forum`: Get all forums (admin-only).
+- **GET** `api/v1/forum/:forumId`: Get forum by ID.
+- **PATCH** `api/v1/forum/:forumId`: Update forum by ID.
+- **DELETE** `api/v1/forum/:forumId`: Delete forum by ID.
 
 ### Likes
-- **POST** `/posts/:postId/like`: Toggle like on a post.
+- **POST** `api/v1/posts/:postId/like`: Toggle like on a post.
 
 ### Comments
-- **POST** `/comments/post/:postId`: Add a comment to a post.
+- **POST** `api/v1/comments/post/:postId`: Add a comment to a post.
 --- 
 ## Amazon S3 Integration
 
