@@ -41,8 +41,8 @@ const createPost = async (req, res) => {
 
     // Populate the post's author field
     const populatedPost = await Post.findById(post._id)
-      .populate("author", "_id firstName lastName"); // Populate author details
-
+      .populate("author", "_id firstName lastName") // Populate author details
+      .populate('comments', "content");
     res.status(201).json({
       message: "Post created successfully",
       post: populatedPost,
@@ -57,7 +57,7 @@ const getAllPosts = async (req, res) => {
 
   try {
     const posts = await Post.find({ isActive: true }).populate("author", "_id firstName lastName ")
-      .populate("comments","content"); // Populate  the id and  name ;
+      .populate("comments", "content"); // Populate  the id and  name ;
     if (!posts) return res.status(404).json({ message: "No posts were found!, please try again" })
 
     res.status(200).json(posts)
@@ -76,7 +76,7 @@ const getPostById = async (req, res) => {
   try {
     const post = await Post.find({ _id: req.params.postId, isActive: true })
       .populate("author", "_id firstName lastName ") // Populate  the id and  name ;
-      .populate("comments", "content");
+      .populate("comments","content")
     if (!post) return res.status(404).json({ message: "No post found!, please try again" })
     res.status(200).json({ post: post });
   } catch (error) {
@@ -110,7 +110,7 @@ const deletePostById = async (req, res) => {
     if (!post || !post.isActive) {
       return res.status(404).json({ message: 'Post not found' })
     };
-    return res.status(204).end() 
+    return res.status(204).end()
   } catch (error) {
     res.status(400).json({ message: error.message })
   }

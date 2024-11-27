@@ -4,7 +4,7 @@ import * as commentController from '../controller/comment.controller.js'
 // Import routes
 const commentRoutes = express.Router();
 
-commentRoutes.post('/comments/post/:postId', commentController.createComment);
+commentRoutes.post('/comments/post/:postId',isAuth, commentController.createComment);
 
 
 export default commentRoutes
