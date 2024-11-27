@@ -3,6 +3,7 @@
 ## Overview
 
 **ForumFullStack** is a full-stack project inspired by platforms like Reddit, where registered users can:
+
 - Create forums categorized by topics (e.g., Tech, Games, Lifestyle, Memes).
 - Post in forums and interact through comments.
 - Upload images to posts using **Amazon S3** for secure and scalable storage.
@@ -13,7 +14,10 @@ This project leverages modern web development tools and libraries for scalabilit
 
 ---
 
-## API Deployment
+## Deployment Urls
+
+The Frontend is deployed at :
+[https://forum-full-stack.vercel.app/](https://forum-full-stack.vercel.app/)
 
 The backend API is deployed at:  
 [https://forumfullstack.onrender.com](https://forumfullstack.onrender.com)
@@ -23,7 +27,9 @@ The backend API is deployed at:
 ## Features
 
 ### **Frontend**
+
 - **Frameworks & Libraries**:
+
   - **Vite**: Fast development server and build tool.
   - **Tailwind CSS**: Utility-first CSS framework for responsive design.
   - **Font Awesome** & **SVG Repo**: For icons and UI aesthetics.
@@ -33,6 +39,7 @@ The backend API is deployed at:
   - **Vercel**: Deployment.
 
 - **Categories**:
+
   - Tech
   - Games
   - Lifestyle
@@ -45,6 +52,7 @@ The backend API is deployed at:
 ---
 
 ### **Backend**
+
 - **Frameworks & Tools**:
   - **Node.js**: JavaScript runtime.
   - **Express.js**: Backend framework.
@@ -76,10 +84,13 @@ AWS_SECRET_ACCESS_KEY=<your-aws-secret-access-key>
 AWS_REGION=<your-aws-region>
 AWS_BUCKET_NAME=<your-s3-bucket-name>
 ```
+
 ---
+
 ## API Endpoints
 
 ### Users
+
 - **POST** `api/v1/user/register`: Register a new user.
 - **POST** `api/v1/user/login`: Login a user.
 - **GET** `api/v1/user`: Get all users (admin-only).
@@ -88,6 +99,7 @@ AWS_BUCKET_NAME=<your-s3-bucket-name>
 - **DELETE** `api/v1/user/:userId`: Delete user by ID (admin-only).
 
 ### Posts
+
 - **POST** `api/v1/post`: Create a new post (with authentication and file upload).
 - **GET** `api/v1/post`: Get all posts (admin-only).
 - **GET** `api/v1/post/:postId`: Get post by ID.
@@ -95,6 +107,7 @@ AWS_BUCKET_NAME=<your-s3-bucket-name>
 - **DELETE** `api/v1/post/:postId`: Delete post by ID.
 
 ### Forums
+
 - **POST** `api/v1/forum`: Create a new forum.
 - **GET** `api/v1/forum`: Get all forums (admin-only).
 - **GET** `api/v1/forum/:forumId`: Get forum by ID.
@@ -102,16 +115,21 @@ AWS_BUCKET_NAME=<your-s3-bucket-name>
 - **DELETE** `api/v1/forum/:forumId`: Delete forum by ID.
 
 ### Likes
+
 - **POST** `api/v1/posts/:postId/like`: Toggle like on a post.
 
 ### Comments
+
 - **POST** `api/v1/comments/post/:postId`: Add a comment to a post.
---- 
+
+---
+
 ## Amazon S3 Integration
 
 ### Setup
 
 1. **Configure the AWS S3 bucket**:
+
    - Create a bucket in the AWS Management Console.
    - Set appropriate permissions for public access (or use signed URLs for private access).
    - Enable CORS for cross-origin requests.
@@ -122,8 +140,10 @@ AWS_BUCKET_NAME=<your-s3-bucket-name>
    AWS_SECRET_ACCESS_KEY=<your-aws-secret-access-key>
    AWS_REGION=<your-aws-region>
    AWS_BUCKET_NAME=<your-s3-bucket-name>
+   ```
 
 ---
+
 ### File Upload Workflow
 
 - Files are uploaded using **Multer** middleware.
@@ -131,13 +151,14 @@ AWS_BUCKET_NAME=<your-s3-bucket-name>
 - File URLs are stored in the database and referenced in the frontend.
 
 ---
+
 ## Recommendations
 
 1. Use **Multer** to handle file uploads efficiently.
 2. Plan the **likes model** carefully to avoid performance bottlenecks.
 3. Leverage **Socket.IO rooms** to separate chat by forums.
----
 
+---
 
 ## Authors
 
