@@ -13,6 +13,13 @@ This project leverages modern web development tools and libraries for scalabilit
 
 ---
 
+## API Deployment
+
+The backend API is deployed at:  
+[https://forumfullstack.onrender.com](https://forumfullstack.onrender.com)
+
+---
+
 ## Features
 
 ### **Frontend**
