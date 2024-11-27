@@ -1,5 +1,7 @@
 import express from 'express'
 import { connect } from './config/database.js'
+import morgan from 'morgan'
+import cors from 'cors'
 import userRoutes from './routes/user.route.js'
 import postRoute from './routes/post.route.js'
 import forumRoutes from './routes/forum.route.js'
@@ -9,7 +11,8 @@ import likeRoute from './routes/like.route.js';
 const PORT = process.env.PORT || 3000
 
 const api = express()
-
+api.use(cors());
+api.use(morgan('dev')) // logging middleware
 api.use(express.json())
 
 api.use('/api/v1', userRoutes);

@@ -14,13 +14,19 @@ const createPost = async (req, res) => {
     });
   }
 
-  if (!req.files) {
-    return res.status(400).json({ message: "No file uploaded" });
-  }
+
 
   try {
-    // Upload files to S3
-    const result = await s3UploadV3(req.files); // Upload files and get their URLs
+
+
+
+    let result;
+    let post;
+
+    if (req.files) {
+      // Upload files to S3
+      result = await s3UploadV3(req.files); // Upload files and get their URLs
+    }
 
     // Verify the forum exists
     const forum = await Forum.findById(forumId);
@@ -28,12 +34,21 @@ const createPost = async (req, res) => {
       return res.status(404).json({ message: "Forum not found" });
     }
 
-    // Create the post
-    const post = await Post.create({
-      ...req.body,
-      image: result.urls, // Store the image URLs
-      author: req.userId, // User ID from the authenticated token
-    });
+
+    if (result) {
+      // Create the post
+      post = await Post.create({
+        ...req.body,
+        image: result.urls, // Store the image URLs
+        author: req.userId, // User ID from the authenticated token
+      });
+    } else {
+      // Create the post without images
+      post = await Post.create({
+        ...req.body,
+        author: req.userId, // User ID from the authenticated token
+      });
+    }
 
     // Add the post ID to the forum's posts array
     forum.posts.push(post._id);
@@ -76,7 +91,7 @@ const getPostById = async (req, res) => {
   try {
     const post = await Post.find({ _id: req.params.postId, isActive: true })
       .populate("author", "_id firstName lastName ") // Populate  the id and  name ;
-      .populate("comments","content")
+      .populate("comments", "content")
     if (!post) return res.status(404).json({ message: "No post found!, please try again" })
     res.status(200).json({ post: post });
   } catch (error) {
