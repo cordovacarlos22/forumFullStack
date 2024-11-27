@@ -11,10 +11,10 @@ postRoute.post('/post', isAuth, multerErrorHandler(uploadFiles), postController.
 // add a comment to the post
 
 // get all posts
-postRoute.get('/post',isAuth,isAdmin, postController.getAllPosts);
+postRoute.get('/post', postController.getAllPosts);
 
 // get post by id
-postRoute.get('/post/:postId', postController.getPostById);
+postRoute.get('/post/:postId',isAuth,isAdmin, postController.getPostById);
 
 // update post by id with auth validation middleware
 postRoute.patch('/post/:postId',isAuth,  postController.updatePostById);
