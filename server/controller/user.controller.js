@@ -4,25 +4,37 @@ import User from "../models/user.model.js";
 
 const getAllUser = async (req, res) => {
   try {
-    const users = await User.find();
-    if (!users) return res.status(404).json({ message: "No users were found!" });
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(400).json(error);
+    let users
+    if (req.role === 'admin') {
+      users = await User.find()
+  } else {
+    users = await User.find({}, { firstName: 1, lastName: 1, avatar: 1 })
+  } 
+
+  if ( !users ||users.length === 0) {
+    return res.status(404).json({ message: "No users were found!" });
   }
-};
+  res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json({ message: "Failed to get users ", error: error });
+}}
 
 const getUserById = async (req, res) => {
   if (!req.params.userId.match(/^[0-9a-fA-F]{24}$/)) {
     return res.status(400).json({ message: "Invalid user ID" });
   }
   try {
-    const user = await User.findById(
-      { _id: req.params.userId },
-      { password: 0 }
-    );
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.status(200).json(user);
+    let user
+    if (req.role === 'admin') {
+      user = await User.findById(req.params.userId,
+        { password: 0 }
+      )
+    } else {
+      user = await User.findById(req.params.userId,
+        {firstName: 1, lastName: 1, avatar: 1, bio: 1 }
+      )
+    }
+    return res.status(200).json({ user });
   } catch (error) {
     res.status(400).json({ message: "Failed to get user ", error: error });
   }
