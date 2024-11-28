@@ -4,13 +4,20 @@ import User from "../models/user.model.js";
 
 const getAllUser = async (req, res) => {
   try {
-    const users = await User.find();
-    if (!users) return res.status(404).json({ message: "No users were found!" });
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(400).json(error);
+    let users
+    if (req.role === 'admin') {
+      users = await User.find()
+  } else {
+    users = await User.find({ firstName: 1, LastName: 1, avatar: 1 })
+  } 
+
+  if (users.length === 0) {
+    return res.status(404).json({ message: "No users were found!" });
   }
-};
+  res.status(200).json(users);
+  } catch (error) {
+    res.status(400).json({ message: "Failed to get users ", error: error });
+}}
 
 const getUserById = async (req, res) => {
   if (!req.params.userId.match(/^[0-9a-fA-F]{24}$/)) {
