@@ -14,11 +14,13 @@ const createPost = async (req, res) => {
     });
   }
 
-
+  // Verify the forum exists
+  const forum = await Forum.findById(forumId);
+  if (!forum) {
+    return res.status(404).json({ message: "Forum not found" });
+  }
 
   try {
-
-
 
     let result;
     let post;
@@ -28,11 +30,7 @@ const createPost = async (req, res) => {
       result = await s3UploadV3(req.files); // Upload files and get their URLs
     }
 
-    // Verify the forum exists
-    const forum = await Forum.findById(forumId);
-    if (!forum) {
-      return res.status(404).json({ message: "Forum not found" });
-    }
+
 
 
     if (result) {
