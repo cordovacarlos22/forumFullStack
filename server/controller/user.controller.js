@@ -8,10 +8,10 @@ const getAllUser = async (req, res) => {
     if (req.role === 'admin') {
       users = await User.find()
   } else {
-    users = await User.find({ firstName: 1, LastName: 1, avatar: 1 })
+    users = await User.find({}, { firstName: 1, lastName: 1, avatar: 1 })
   } 
 
-  if (users.length === 0) {
+  if ( !users ||users.length === 0) {
     return res.status(404).json({ message: "No users were found!" });
   }
   res.status(200).json(users);
