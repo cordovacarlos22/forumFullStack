@@ -24,12 +24,17 @@ const getUserById = async (req, res) => {
     return res.status(400).json({ message: "Invalid user ID" });
   }
   try {
-    const user = await User.findById(
-      { _id: req.params.userId },
-      { password: 0 }
-    );
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.status(200).json(user);
+    let user
+    if (req.role === 'admin') {
+      user = await User.findById(req.params.userId,
+        { password: 0 }
+      )
+    } else {
+      user = await User.findById(req.params.userId,
+        {firstName: 1, lastName: 1, avatar: 1, bio: 1 }
+      )
+    }
+    return res.status(200).json({ user });
   } catch (error) {
     res.status(400).json({ message: "Failed to get user ", error: error });
   }
