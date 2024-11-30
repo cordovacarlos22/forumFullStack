@@ -1,11 +1,12 @@
 
 
+
+
+
 const Home = () => {
   return (
     <div>
-      <button>
-        hola
-      </button>
+      
     </div>
   )
 }
