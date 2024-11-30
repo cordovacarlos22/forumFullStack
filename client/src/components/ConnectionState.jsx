@@ -1,8 +1,10 @@
 import React from 'react'
 
-const ConnectionState = () => {
+const ConnectionState = ({ isConnected }) => {
   return (
-    <div>ConnectionState</div>
+    <>
+      {isConnected ? 'connected' : 'disconnected'}
+    </>
   )
 }
 
