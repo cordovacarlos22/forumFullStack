@@ -24,18 +24,19 @@ const Chat = () => {
       setIsConnected(false);
     }
 
-    const onEvent = () => {
-      setEvents(previous => [...previous, value]);
+    const onEvent = (data) => {
+      console.log(data);
+      setEvents(prev => [...prev, data.message]);
     }
 
     socket.on('connect', onConnect);
-    socket.on('message', onEvent);
     socket.on('disconnect', onDisconnect);
+    socket.on('server-message', onEvent);
 
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
-      socket.off('message', onEvent);
+      socket.off('server-message', onEvent);
     };
 
   }, [])
@@ -46,8 +47,8 @@ const Chat = () => {
       <aside className='bg-indigo-300 rounded-md m-4 p-4 text-black '>
         <h1>Chat</h1>
         <ConnectionState isConnected={isConnected} />
-        <Event events={['hola']} />
-        <Form />
+        <Event events={events} />
+        <Form isConnected={isConnected} />
         <ConnectionManager isConnected={isConnected} />
       </aside>
 
