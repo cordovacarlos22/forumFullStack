@@ -1,14 +1,6 @@
-
 import { Outlet } from 'react-router-dom';
-
-const Nav = () => {
-  return (
-  <div>
-    Nav
-    <Outlet></Outlet>
-  </div>
-
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
+
 const Nav = () => {
   return (
     <>
@@ -47,7 +39,7 @@ const Nav = () => {
         <Navbar.Link href="#">Contact</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
-    
+    <Outlet></Outlet>
     </>
   )
 }
