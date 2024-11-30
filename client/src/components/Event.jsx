@@ -1,8 +1,16 @@
 import React from 'react'
 
-const Event = () => {
+const Event = ({ events }) => {
   return (
-    <div>Event</div>
+    <>
+      <ul>
+        {
+          events.map((event, index) => (
+            <li key={index}>{event.text}</li>
+          ))
+        }
+      </ul>
+    </>
   )
 }
 
