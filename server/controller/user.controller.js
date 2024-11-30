@@ -31,7 +31,7 @@ const getUserById = async (req, res) => {
       )
     } else {
       user = await User.findById(req.params.userId,
-        {firstName: 1, lastName: 1, avatar: 1, bio: 1 }
+        {_id: 1, firstName: 1, lastName: 1, avatar: 1, bio: 1 }
       )
     }
     return res.status(200).json({ user });
