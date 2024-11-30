@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const mainUrl = 'http://localhost:5173/api/v1'
+const mainUrl = 'http://localhost:3000/api/v1'
 
 const userLogin = (loginData) => axios.post(`${ mainUrl }/user/login`, loginData)
 
