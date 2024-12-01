@@ -2,15 +2,18 @@ import React from 'react'
 
 const Event = ({ events }) => {
   return (
-    <div className='text-red'>
-      <ul>
-        {
-          events.map((event, index) => (
-            <li key={index}>{event}</li>
-          ))
-        }
-      </ul>
-    </div>
+    
+      events.map((event, index) => (
+        <div key={index}>
+          <strong>User:</strong> {event.user}
+          <br />
+          <strong>Message:</strong> {event.message}
+          <br />
+          <strong>Room:</strong> {event.room}
+          <hr />
+        </div>
+      ))
+    
   )
 }
 
