@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { socket } from '../utils/socket';
-
+import { useAuthContext } from "../hooks/useAuth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Form = ({ isConnected }) => {
+  const { userPayload } = useAuthContext()
+ // const { firstName } = userPayload
   const [message, setMessage] = useState('');
   const [isloading, setLoading] = useState(false);
   const [room, setRoom] = useState("");
@@ -58,7 +60,7 @@ const Form = ({ isConnected }) => {
       setLoading(false);
       return;
     }
-    socket.timeout(5000).emit('user-message', { user: "carlos", message, room }, () => {
+    socket.timeout(5000).emit('user-message', { user: `${userPayload.firstName}`, message, room }, () => {
 
       setLoading(false);
     })
