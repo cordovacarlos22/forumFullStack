@@ -18,6 +18,18 @@ const io = new Server(server, {
   }
 });
 
+io.on("connection", (socket) => {
+
+  // listen to the message that user send from frontend name message
+  socket.on("user-message", (data) => {
+
+    io.emit('server-message', data)
+
+
+  })
+
+})
+
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
