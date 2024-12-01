@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ErrorPage from './pages/Errorpage'
+import { AuthProvider } from "./context/authContext"
 
  function App() {
 
@@ -29,7 +30,9 @@ import ErrorPage from './pages/Errorpage'
 
   return (
     <>
+    <AuthProvider>
     <RouterProvider router={router}/>
+    </AuthProvider>
     </>
 
   )
