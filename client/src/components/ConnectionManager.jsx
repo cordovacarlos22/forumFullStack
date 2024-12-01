@@ -25,7 +25,7 @@ const ConnectionManager = ({ isConnected }) => {
         <>
           <button
             onClick={handleConnect}
-          >Connect Chat</button >
+          >Start Chat</button >
         </>
 
       )}

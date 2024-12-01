@@ -1,3 +1,4 @@
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Nav from './components/Nav'
 import Home from './pages/Home'
@@ -38,3 +39,4 @@ import { AuthProvider } from "./context/authContext"
   )
 }
 export default App
+

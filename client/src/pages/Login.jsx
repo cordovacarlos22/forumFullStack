@@ -2,7 +2,16 @@
 import { useForm } from "react-hook-form";
 import { userLogin } from "../services/auth.service";
 import { useAuthContext } from "../hooks/useAuth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import {ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 //import { useNavigate } from "react-router-dom";
+
+const schema = yup.object({
+  email: yup.string().required(),
+  password: yup.string().min(1).required(),
+}).required()
 
 const Login = () => {
   //const navigate = useNavigate();
@@ -12,17 +21,50 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (loginData) => {
     try {
+      toast.info(' waiting for server !', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      })
       const response = await userLogin(loginData);
       if (response.status === 200) {
         login(response.data.token);
-        //navigate("/home");
+
+        toast.success(' login succesfull !', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+
+        setTimeout(() => {
+          //navigate("/home");
+        }, 2000);
       }
     } catch (error) {
-      console.error(("Error al iniciar sesión:", error));
+      toast.error(`please verify credentials ${error.message}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
     }
   };
 
@@ -110,6 +152,7 @@ const Login = () => {
                         </Link> */}
           </p>
         </div>
+        <ToastContainer />
       </div>
     </>
   );
