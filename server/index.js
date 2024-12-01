@@ -11,7 +11,13 @@ import likeRoute from './routes/like.route.js';
 const PORT = process.env.PORT || 3000
 
 const api = express()
-api.use(cors());
+api.use(cors(
+    {
+        origin: '*', // Allow all origins
+        credentials: true, // Send cookies
+        methods: 'GET, POST, PUT, DELETE, PATCH' // Specify allowed methods
+    }
+));
 api.use(morgan('dev')) // logging middleware
 api.use(express.json())
 
