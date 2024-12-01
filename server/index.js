@@ -14,8 +14,6 @@ const api = express()
 api.use(cors(
     {
         origin: '*', // Allow all origins
-        credentials: true, // Send cookies
-        methods: 'GET, POST, PUT, DELETE, PATCH' // Specify allowed methods
     }
 ));
 api.use(morgan('dev')) // logging middleware
