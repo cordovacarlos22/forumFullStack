@@ -3,11 +3,13 @@ import http from "http"; // Built-in Node.js module
 import { Server } from 'socket.io'
 import cors from 'cors';
 
-const PORT = process.env.NODE_ENV || 8000;
+const PORT = process.env.PORT || 3001
 
 const app = express();
 
-app.use(cors());
+app.use(cors(
+  { origin: "*" }
+));
 
 const server = http.createServer(app);
 
@@ -31,6 +33,6 @@ io.on("connection", (socket) => {
 })
 
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  console.log(`Server running on port http://localhost:${PORT}`)
+})
 
