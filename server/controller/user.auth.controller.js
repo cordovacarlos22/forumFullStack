@@ -52,6 +52,8 @@ const login = async (req, res) => {
    
     const payload = {
       _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       role: user.role,
       iat: Math.floor(Date.now() / 1000), // Fecha de creación del token en segundos
