@@ -2,6 +2,7 @@ import express from 'express'
 import * as postController from '../controller/post.controller.js'
 import { isAuth } from '../middlewares/isAuth.js';
 import { isAdmin } from '../middlewares/isAdmin.js';
+import { isTheSameUser } from '../middlewares/isTheSameUser.js';
 import { uploadFiles, multerErrorHandler } from '../middlewares/multerUploadFile.midleware.js';
 const postRoute = express.Router();
 
@@ -14,13 +15,13 @@ postRoute.post('/post', isAuth, multerErrorHandler(uploadFiles), postController.
 postRoute.get('/post', postController.getAllPosts);
 
 // get post by id
-postRoute.get('/post/:postId',isAuth,isAdmin, postController.getPostById);
+postRoute.get('/post/:postId', postController.getPostById);
 
 // update post by id with auth validation middleware
-postRoute.patch('/post/:postId',isAuth,  postController.updatePostById);
+postRoute.patch('/post/:postId', isAuth, isTheSameUser, postController.updatePostById);
 
 // delete post by id with auth validation middleware
-postRoute.delete('/post/:postId',isAuth, postController.deletePostById);
+postRoute.delete('/post/:postId', isAuth, isTheSameUser, postController.deletePostById);
 
 
 export default postRoute
