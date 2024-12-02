@@ -2,8 +2,8 @@
 
 const Aside = () => {
   return (
-  <>
-  <button
+    <>
+     <button
     data-drawer-target="default-sidebar"
     data-drawer-toggle="default-sidebar"
     aria-controls="default-sidebar"
@@ -169,8 +169,7 @@ const Aside = () => {
       </ul>
     </div>
   </aside>
-</>
-
+    </>
   )
 }
 
