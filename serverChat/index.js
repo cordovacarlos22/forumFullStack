@@ -21,11 +21,17 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
+  console.log("User connected");
+
+  socket.on("join-room", (data) => {
+    socket.join(data);
+  });
 
   // listen to the message that user send from frontend name message
   socket.on("user-message", (data) => {
-
-    io.emit('server-message', data)
+      console.log(data)
+    // io.emit('server-message', data)
+    io.to(data.room).emit('server-message', data)
 
 
   })

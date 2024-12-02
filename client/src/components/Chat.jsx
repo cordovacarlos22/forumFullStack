@@ -22,11 +22,12 @@ const Chat = () => {
 
     const onDisconnect = () => {
       setIsConnected(false);
+      setEvents([]);
     }
 
     const onEvent = (data) => {
       console.log(data);
-      setEvents(prev => [...prev, data.message]);
+      setEvents(prev => [...prev, data]);
     }
 
     socket.on('connect', onConnect);
@@ -44,11 +45,11 @@ const Chat = () => {
 
   return (
     <>
-      <aside className='bg-indigo-300 rounded-md m-4 p-4 text-black '>
+      <aside className='bg-indigo-300 rounded-md m-4 p-4 text-black flex flex-col '>
         <h1>Chat</h1>
         <ConnectionState isConnected={isConnected} />
-        <Event events={events} />
         <Form isConnected={isConnected} />
+        <Event events={events} />
         <ConnectionManager isConnected={isConnected} />
       </aside>
 

@@ -10,7 +10,7 @@
 - React to posts with likes.
 - Engage in real-time chats with forum members using Socket.IO.
 
-This project leverages modern web development tools and libraries for scalability, real-time functionality, and a responsive design.
+This project leverages modern web development tools and libraries for scalability, real-time functionality, and a responsive design also his project includes a real-time chat feature powered by **Socket.IO**. The backend API for the chat system is hosted on Render.
 
 ---
 
@@ -21,6 +21,10 @@ The Frontend is deployed at :
 
 The backend API is deployed at:  
 [https://forumfullstack.onrender.com](https://forumfullstack.onrender.com)
+
+The real-time chat API is accessible at:
+
+**[https://forumfullstack-chat-api.onrender.com](https://forumfullstack-chat-api.onrender.com)**
 
 ---
 

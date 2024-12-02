@@ -7,11 +7,17 @@ import postRoute from './routes/post.route.js'
 import forumRoutes from './routes/forum.route.js'
 import commentRoutes from './routes/comment.route.js'
 import likeRoute from './routes/like.route.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const PORT = process.env.PORT || 3000
 
 const api = express()
-api.use(cors());
+api.use(cors(
+    {
+        origin: process.env.FRONTEND_URL,
+    }
+));
 api.use(morgan('dev')) // logging middleware
 api.use(express.json())
 
