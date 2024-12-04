@@ -4,23 +4,22 @@ import { getPostsService } from "../services/post.service";
 
 const Home = () => {
   const { userPayload, autenticated } = useAuthContext(); // token viene del contexto
-  const [ posts, setPosts ] = useState([])
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await getPostsService()
+        const response = await getPostsService();
         console.log(response.data);
-        
-        setPosts(response.data)
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-        
-      }
-    }
 
-    fetchPosts()
-  }, [])
+        setPosts(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
     <div>
@@ -33,11 +32,15 @@ const Home = () => {
       ) : (
         <p>Loading user info...</p>
       )}
-      <div>
       {posts.map((post) => {
-        <div key={post._id}>{post.title}{post.content}{post.image}</div>
+        return (
+          <div key={post._id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+            {post.image && <img src={post.image} alt={post.title} />}
+          </div>
+        );
       })}
-      </div>
     </div>
   );
 };
