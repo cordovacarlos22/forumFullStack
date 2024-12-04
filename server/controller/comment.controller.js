@@ -1,3 +1,4 @@
+import e from "express";
 import Comment from "../models/commet.model.js";
 import Post from "../models/post.model.js";
 
@@ -78,8 +79,6 @@ const getAllCommentsByPost = async (req, res) => {
 
     const { postId } = req.params;
     const comments = await Comment.find({ postId })
-      .populate("postId", "_id title content")
-      .populate("userId", "_id firstName lastName");
     if (!comments) return res.status(404).json({ message: "No comments were found for this post" });
 
     res.status(200).json(comments);
@@ -90,9 +89,40 @@ const getAllCommentsByPost = async (req, res) => {
 };
 
 
+// update comments 
+const updateCommentsByPostId = async (req, res) => {
+
+  try {
+    if (!req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid post ID" });
+    }
+    const { postId } = req.params;
+    const { content } = req.body;
+
+    const comment = await Comment.findOneAndUpdate(
+      { postId },
+      { content },
+      { new: true }
+    )
+    // .populate("postId", "_id title content")
+    // .populate("userId", "_id firstName lastName");
+
+    if (!comment) return res.status(404).json({ message: "No comment found for this post" });
+    res.status(200).json({ message: "Comment updated successfully", comment });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+
+
+
+}
+
+
+
 export {
   createComment,
   getAllComments,
   getAllCommentsByPost, // If we want to filter comments by postId
+  updateCommentsByPostId
 
 }
