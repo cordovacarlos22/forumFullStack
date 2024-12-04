@@ -5,6 +5,7 @@ const commentSchema = new mongoose.Schema(
     postId: { type: mongoose.Schema.Types.ObjectId, ref: "Post", required: true, unique: true }, // Reference to the post
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // User who made the comment
     content: [{ type: String, required: true }], // Content of the comment
+    isActive: { type: Boolean, default: true }
   },
   { timestamps: true }
 );
