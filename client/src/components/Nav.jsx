@@ -1,4 +1,6 @@
 import { Outlet } from 'react-router-dom';
+import Aside from './Aside';
+
 const Nav = () => {
   return (
     <>
@@ -79,9 +81,6 @@ const Nav = () => {
         type="button"
         className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
         id="user-menu-button"
-        aria-expanded="false"
-        data-dropdown-toggle="user-dropdown"
-        data-dropdown-placement="bottom"
       >
         <span className=" sr-only">Open user menu</span>
         <svg
@@ -104,6 +103,7 @@ const Nav = () => {
   </div>
 <Outlet></Outlet>
 </nav>
+<Aside />
     </>
   );
 };
