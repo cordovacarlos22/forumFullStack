@@ -52,8 +52,26 @@ const createComment = async (req, res) => {
   }
 };
 
+// get all comments for a post
+const getAllComments = async (req, res) => {
+  
+  try {
+    const comments = await Comment.find()
+      .populate("postId","_id title content")
+      .populate("userId", "_id firstName lastName");
+    if (!comments) return res.status(404).json({ message: "No comments were found for this post" });
+
+    res.status(200).json(comments);
+  } catch (error) {
+    
+    res.status(500).json({ message: "Internal Server Error", details: error.message });
+  }
+};
+
 
 export {
   createComment,
+  getAllComments,
+  // getAllCommentsByPost, // If we want to filter comments by postId
   
 }
