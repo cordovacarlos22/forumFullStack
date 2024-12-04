@@ -20,14 +20,14 @@ const AuthProvider = ({ children }) => {
         setUserPayload(null)
     }
 
-    useEffect( ()=> {
+    useEffect(() => {
         const token = localStorage.getItem('token')
-        if(token) {
+        if (token) {
             const payload = jwtDecode(token)
             setAutenticated(true)
             setUserPayload(payload)
         }
-    },[])
+    }, [])
 
     const data = {
         autenticated,
@@ -41,7 +41,6 @@ const AuthProvider = ({ children }) => {
             {children}
         </AuthContext.Provider>
     )
-
-
 }
-export {AuthContext, AuthProvider}
+
+export { AuthContext, AuthProvider }
