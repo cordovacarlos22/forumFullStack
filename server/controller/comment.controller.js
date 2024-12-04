@@ -113,8 +113,23 @@ const updateCommentsByPostId = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 
+}
 
+const deleteCommentById = async (req, res) => {
+  // check to see if ID is a matching with a matching object(has to be 24  hexadecimal  alphanumeric characters)
+  if (!req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
+    return res.status(400).json({ message: 'Invalid post ID' })
+  };
 
+  try {
+    const comment = await Comment.findByIdAndUpdate(req.params.commentId, { isActive: false }, { new: false })
+    if (!comment || !comment.isActive) {
+      return res.status(404).json({ message: 'Comment not found' })
+    };
+    return res.status(204).end()
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
 }
 
 
@@ -123,6 +138,7 @@ export {
   createComment,
   getAllComments,
   getAllCommentsByPost, // If we want to filter comments by postId
-  updateCommentsByPostId
+  updateCommentsByPostId,
+  deleteCommentById
 
 }
