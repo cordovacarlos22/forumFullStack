@@ -54,16 +54,37 @@ const createComment = async (req, res) => {
 
 // get all comments for a post
 const getAllComments = async (req, res) => {
-  
+
   try {
     const comments = await Comment.find()
-      .populate("postId","_id title content")
+      .populate("postId", "_id title content")
       .populate("userId", "_id firstName lastName");
     if (!comments) return res.status(404).json({ message: "No comments were found for this post" });
 
     res.status(200).json(comments);
   } catch (error) {
-    
+
+    res.status(500).json({ message: "Internal Server Error", details: error.message });
+  }
+};
+
+// get all comments for a specific post
+const getAllCommentsByPost = async (req, res) => {
+
+  try {
+    if (!req.params.postId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid post ID" });
+    }
+
+    const { postId } = req.params;
+    const comments = await Comment.find({ postId })
+      .populate("postId", "_id title content")
+      .populate("userId", "_id firstName lastName");
+    if (!comments) return res.status(404).json({ message: "No comments were found for this post" });
+
+    res.status(200).json(comments);
+  } catch (error) {
+
     res.status(500).json({ message: "Internal Server Error", details: error.message });
   }
 };
@@ -72,6 +93,6 @@ const getAllComments = async (req, res) => {
 export {
   createComment,
   getAllComments,
-  // getAllCommentsByPost, // If we want to filter comments by postId
-  
+  getAllCommentsByPost, // If we want to filter comments by postId
+
 }

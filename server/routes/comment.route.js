@@ -8,7 +8,9 @@ commentRoutes.post('/comments/post/:postId', isAuth, commentController.createCom
 
 // Get all comments for a post
 commentRoutes.get('/comments', commentController.getAllComments);
-// commentRoutes.get('/comments/post/:postId', commentController.getAllCommentsByPost);
+
+// Get all comments for a specific post
+commentRoutes.get('/comments/post/:postId', commentController.getAllCommentsByPost);
 // update comments is auth y is the  same user
 // delete comments is auth y is the same user
 
