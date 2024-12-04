@@ -1,8 +1,31 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuth";
+import { useEffect, useState } from "react";
+import { getMyUserService } from "../services/user.service";
 
 const Nav = () => {
-  const { autenticated, logout } = useAuthContext();
+  const { autenticated, logout, userPayload } = useAuthContext();
+  const [ user, setUser ] = useState();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem('token')
+        const userId = userPayload._id
+        if (token) {
+          const response = await getMyUserService(token, userId)
+          console.log(response.data);
+          
+          setUser(response.data)
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
+    if (autenticated) {
+      fetchUserData()
+    }
+  },[autenticated, userPayload])
   return (
     <>
       <nav className="max-w-screen bg-white border-gray-200 dark:bg-gray-900">
@@ -106,21 +129,11 @@ const Nav = () => {
                   data-dropdown-placement="bottom"
                 >
                   <span className=" sr-only">Open user menu</span>
-                  <svg
-                    className="w-[41px] h-[41px] text-gray-800 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <img
+                    src={user.user.avatar}
+                    alt="User Avatar"
+                    className="w-[41px] h-[41px] rounded-full object-cover"
+                  />
                 </button>
               </>
             ) : (
