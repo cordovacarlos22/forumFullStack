@@ -2,9 +2,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { getMyUserService } from "../services/user.service";
-import { Outlet } from 'react-router-dom';
-import Aside from './Aside';
-
+import Aside from "./Aside";
 
 const Nav = () => {
   const { autenticated, logout, userPayload } = useAuthContext();
@@ -33,13 +31,11 @@ const Nav = () => {
     <>
       <nav className="max-w-screen bg-white border-gray-200 dark:bg-gray-900">
         <div className="flex justify-between p-4">
+          {/* Logo and Title */}
           <div className="flex items-center space-x-3 rtl:space-x-reverse">
             <svg
               className="w-[48px] h-[48px] text-gray-800 dark:text-white"
-              aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
               fill="none"
               viewBox="0 0 24 24"
             >
@@ -54,6 +50,8 @@ const Nav = () => {
               MushRoom-Forum
             </span>
           </div>
+
+          {/* Search Bar */}
           <div className="flex items-center mx-3 w-1/2">
             <form className="w-full relative">
               <label
@@ -66,7 +64,6 @@ const Nav = () => {
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg
                     className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 20 20"
@@ -96,21 +93,23 @@ const Nav = () => {
               </div>
             </form>
           </div>
+
+          {/* User Actions */}
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
             {autenticated ? (
               <>
                 <NavLink to="/" onClick={logout}>
                   <button
                     type="button"
-                    className=" text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2"
+                    className="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40"
                   >
-                    Cerrar Sesión
+                    Logout
                   </button>
                 </NavLink>
                 {user && (
                   <button
                     type="button"
-                    className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                   >
                     <img
                       src={user.user.avatar}
@@ -124,54 +123,17 @@ const Nav = () => {
               <NavLink to="/login">
                 <button
                   type="button"
-                  className=" text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2"
+                  className="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40"
                 >
-                  Iniciar Sesión
+                  Login
                 </button>
               </NavLink>
             )}
           </div>
         </div>
-        <Outlet />
+      {/* <Aside /> */}
       </nav>
-      </form>
-    </div>
-
-    <div className="flex items-center space-x-6 rtl:space-x-reverse">
-        <button
-        type="button"
-        className=" text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2"
-      >
-        Iniciar Sesión
-      </button>
-      <button
-        type="button"
-        className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-        id="user-menu-button"
-      >
-        <span className=" sr-only">Open user menu</span>
-        <svg
-  className="w-[41px] h-[41px] text-gray-800 dark:text-white"
-  aria-hidden="true"
-  xmlns="http://www.w3.org/2000/svg"
-  width={24}
-  height={24}
-  fill="currentColor"
-  viewBox="0 0 24 24"
->
-  <path
-    fillRule="evenodd"
-    d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-    clipRule="evenodd"
-  />
-</svg>
-      </button>
-    </div>
-  </div>
-<Outlet></Outlet>
-</nav>
-<Aside />
-
+      <Outlet />
     </>
   );
 };
