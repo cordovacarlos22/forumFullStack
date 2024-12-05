@@ -5,16 +5,15 @@ import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().min(1).required(),
-}).required(); 
+}).required();
 const Register = () => {
   const navigate = useNavigate();
-  
   const {
     register,
     handleSubmit,
@@ -84,9 +83,9 @@ const Register = () => {
   };
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900 ">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-screen lg:py-0 mt-4">
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <section className="bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-screen lg:py-0 ">
+          <div className="w-full  rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create an account
@@ -180,21 +179,20 @@ const Register = () => {
                     </div>
                   )}
                 </div>
-                
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-600 my-2 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Create an account
                 </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                <p className="mt-10 text-center text-sm text-gray-500 pb-2">
                   Already have an account?{" "}
-                  {/* <Link
-                      to="/login"
-                      className="font-medium text-blue-600 hover:underline dark:text-primary-500"
-                    >
-                      Login here
-                    </Link> */}
+                  <Link
+                    to="/login"
+                    className="font-semibold leading-6 text-blue-500 hover:text-blue-800"
+                  >
+                    Login
+                  </Link>
                 </p>
               </form>
             </div>
