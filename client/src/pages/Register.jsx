@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   firstName: yup.string().required(),
@@ -13,7 +13,7 @@ const schema = yup.object({
   password: yup.string().min(1).required(),
 }).required(); 
 const Register = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   
   const {
     register,
@@ -53,7 +53,7 @@ const Register = () => {
         // Navigate to login page
         setTimeout(() => {
           setTimeout(() => {
-            //navigate('/login')
+            navigate('/login')
 
           }, 3000)
           toast.info(' navigating to login !', {

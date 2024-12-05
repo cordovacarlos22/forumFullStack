@@ -4,17 +4,20 @@ import { userLogin } from "../services/auth.service";
 import { useAuthContext } from "../hooks/useAuth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 //import { useNavigate } from "react-router-dom";
 
-const schema = yup.object({
-  email: yup.string().required(),
-  password: yup.string().min(1).required(),
-}).required()
+const schema = yup
+  .object({
+    email: yup.string().required(),
+    password: yup.string().min(1).required(),
+  })
+  .required();
 
 const Login = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const { login } = useAuthContext();
 
   const {
@@ -25,7 +28,7 @@ const Login = () => {
 
   const onSubmit = async (loginData) => {
     try {
-      toast.info(' waiting for server !', {
+      toast.info(" waiting for server !", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -33,13 +36,13 @@ const Login = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light"
-      })
+        theme: "light",
+      });
       const response = await userLogin(loginData);
       if (response.status === 200) {
         login(response.data.token);
 
-        toast.success(' login succesfull !', {
+        toast.success(" login succesfull !", {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -47,11 +50,11 @@ const Login = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light"
+          theme: "light",
         });
 
         setTimeout(() => {
-          //navigate("/home");
+          navigate("/");
         }, 2000);
       }
     } catch (error) {
@@ -63,7 +66,7 @@ const Login = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light"
+        theme: "light",
       });
     }
   };
@@ -111,11 +114,6 @@ const Login = () => {
                 >
                   Password
                 </label>
-                {/* <div className="text-sm">
-                      <Link href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                        Forgot password?
-                      </Link>
-                    </div> */}
               </div>
               <div className="mt-2">
                 <input
@@ -147,9 +145,12 @@ const Login = () => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Do not have an Account?{" "}
-            {/* <Link to='/register' className="font-semibold leading-6 text-blue-500 hover:text-blue-800">
-                            Sign Up
-                        </Link> */}
+            <Link
+              to="/register"
+              className="font-semibold leading-6 text-blue-500 hover:text-blue-800"
+            >
+              Sign Up
+            </Link>
           </p>
         </div>
         <ToastContainer />
