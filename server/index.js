@@ -13,10 +13,12 @@ dotenv.config();
 const PORT = process.env.PORT || 3000
 
 const api = express()
-api.use(cors(
-    {
+api.use(cors({
+    origin: '*'
+}
+    /* {
         origin: process.env.FRONTEND_URL,
-    }
+    } */
 ));
 api.use(morgan('dev')) // logging middleware
 api.use(express.json())
