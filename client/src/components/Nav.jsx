@@ -3,7 +3,7 @@ import { useAuthContext } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { getMyUserService } from "../services/user.service";
 import Aside from "./Aside";
-
+import { Link } from "react-router-dom";
 const Nav = () => {
   const { autenticated, logout, userPayload } = useAuthContext();
   const [user, setUser] = useState(null);
@@ -29,27 +29,31 @@ const Nav = () => {
 
   return (
     <>
-      <nav className="max-w-screen bg-white border-gray-200 dark:bg-gray-900">
-        <div className="flex justify-between p-4">
+      <nav className="max-w-screen relative border-gray-200 bg-gray-900 z-50">
+        <div className=" fixed top-0 flex justify-between p-4 w-full bg-gray-900 ">
           {/* Logo and Title */}
-          <div className="flex items-center space-x-3 rtl:space-x-reverse">
-            <svg
-              className="w-[48px] h-[48px] text-gray-800 dark:text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeWidth={2}
-                d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
-              />
-            </svg>
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              MushRoom-Forum
-            </span>
-          </div>
+          <Link
+            to={"/"}
+          >
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <svg
+                className="w-[48px] h-[48px] text-gray-800 dark:text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeWidth={2}
+                  d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
+                />
+              </svg>
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                MushRoom-Forum
+              </span>
+            </div>
+          </Link>
 
           {/* Search Bar */}
           <div className="flex items-center mx-3 w-1/2">
@@ -131,7 +135,6 @@ const Nav = () => {
             )}
           </div>
         </div>
-      {/* <Aside /> */}
       </nav>
       <Outlet />
     </>
