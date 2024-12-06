@@ -12,6 +12,26 @@ const Home = () => {
 
 
   return (
+
+    <div
+      className=" md:flex w-screen min-h-screen  bg-bg-gray-900 "
+    >
+
+      <div
+        className="min-h-screen  border-red-400 border-2 bg-bg-gray-900"
+      >
+        <div
+          className=" relative  h-full "
+        >
+          <Aside />
+        </div>
+      </div>
+      <div
+        className="  text-white flex flex-col justify-center items-center  bg-gray-900  w-full"
+      >
+        <h1
+          className="text-white"
+        >Home</h1>
     <div className=" md:flex w-screen ">
       <div className="min-h-screen relative border-red-400 border-2">
         <Aside />
