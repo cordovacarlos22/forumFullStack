@@ -11,6 +11,8 @@ import { AuthProvider } from "./context/authContext"
 import { UsersProvider } from './context/users.context'
 import { PostProvider } from './context/postContext'
 import { ForumProvider } from './context/forum.context'
+import PostsComents from './components/PostsComents'
+
 
  function App() {
 
@@ -28,7 +30,10 @@ import { ForumProvider } from './context/forum.context'
         /*  { path: '/CreatePosts', element: <CreatePosts /> },
         { path: '/Profile', element: <Profile /> }, 
         { path: '/PostsProfile', element: <PostsProfile /> },
-        { path: '/PostsComments', element: <PostsComments /> }, */
+    /*  { path: '/CreatePosts', element: <CreatePosts /> },
+        { path: '/PostsProfile', element: <PostsProfile /> },
+        { path: '/Profile', element: <Profile /> }, */
+        { path: '/PostsComments', element: <PostsComents /> }, 
       ],
     }
   ])
