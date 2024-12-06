@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 const PostContext = createContext();
 
 const PostProvider = ({ children }) => {
-    const mainUrl = /* import.meta.env.VITE_FORO_API || */ 'http://localhost:3000/api/v1';
+    const mainUrl = import.meta.env.VITE_FORO_API
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const PostProvider = ({ children }) => {
         };
 
         fetchPosts();
-    }, []); // No necesitas incluir `mainUrl` si es una constante
+    }, [])
 
     return (
         <PostContext.Provider value={{ posts, setPosts }}>

@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react'
 const UsersContext = createContext()
 
 const UsersProvider = ({ children }) => {
-    const mainUrl = /* import.meta.env.VITE_FORO_API ||  */'http://localhost:3000/api/v1'
+    const mainUrl = import.meta.env.VITE_FORO_API
     const token = localStorage.getItem('token')
     const [users, setUsers] = useState([])
 
