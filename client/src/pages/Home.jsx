@@ -7,62 +7,53 @@ import Aside from "../components/Aside";
 const Home = () => {
   const { userPayload, autenticated } = useAuthContext(); // token viene del contexto
   const { forums } = useContext(ForumContext);
-  console.log('forums desde home',forums);
-  
-
 
   return (
-
-    <div
-      className=" md:flex w-screen min-h-screen  bg-bg-gray-900 "
-    >
-
-      <div
-        className="min-h-screen  border-red-400 border-2 bg-bg-gray-900"
-      >
-        <div
-          className=" relative  h-full "
-        >
-          <Aside />
-        </div>
-      </div>
-      <div
-        className="  text-white flex flex-col justify-center items-center  bg-gray-900  w-full"
-      >
-        <h1
-          className="text-white"
-        >Home</h1>
-    <div className=" md:flex w-screen ">
-      <div className="min-h-screen relative border-red-400 border-2">
+    <div className="md:flex w-screen min-h-screen bg-gray-900">
+      {/* Aside Section */}
+      <aside className="min-h-screen w-64 bg-gray-800">
         <Aside />
-      </div>
-      <div className="w-1/2 ">
-        <h1>Home</h1>
-        {autenticated ? (
-          <div>
-            <p>Name: {userPayload.firstName}</p>
-            <p>Email: {userPayload.email}</p>
-          </div>
-        ) : (
-          <p>Loading user info...</p>
-        )}
-        {
-          
-          forums.map((forum) => 
-            forum.posts.map((post) => (
-              <div key={post._id}>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 text-white flex flex-col bg-gray-900">
+        {/* Header */}
+        <header className="p-4">
+          <h1 className="text-2xl font-bold">Home</h1>
+        </header>
+
+        {/* User Info */}
+        <section className="p-4">
+          {autenticated ? (
+            <div>
+              <p>Name: {userPayload.firstName}</p>
+              <p>Email: {userPayload.email}</p>
+            </div>
+          ) : (
+            <p>Loading user info...</p>
+          )}
+        </section>
+
+        {/* Forum Posts */}
+        <section className="p-4 space-y-4">
+          {forums && forums.length > 0 ? (
+            forums.map((forum) =>
+              forum.posts.map((post) => (
                 <Post
+                  key={post._id}
                   id={post._id}
                   title={post.title}
-                  forum={forum.title} 
+                  forum={forum.title} // Verify if this should be "title"
                   content={post.content}
                   postImage={post.image[0]}
                 />
-              </div>
-            ))
-          )
-       }
-      </div>
+              ))
+            )
+          ) : (
+            <p>No forums or posts available</p>
+          )}
+        </section>
+      </main>
     </div>
   );
 };
