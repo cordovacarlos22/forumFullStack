@@ -25,10 +25,17 @@ function Post() {
             </div>
         </div>
 
+        <div>
+           <p className="p-4 text-white mt-2">
+            Lorem, Lorem
+             ipsum dolor sit amet consectetur adipisicing elit. Nisi, iste quis corrupti consequatur harum est assumenda maxime ullam! Harum eius tenetur amet unde nisi asperiores, sunt voluptatibus? Hic, consectetur possimus.
+           </p>
+        </div>
+
 
         <div className="flex items-center justify-center mt-5 bg-glass">
             <div className="rounded-xl ">
-               <div className=" p-9 pl-[70px] pr-[70px] rounded-xl  p-4 " > 
+               <div className=" p-9 pl-[70px] pr-[70px] rounded-xl" > 
                 <div className="w-70 h-[500px]">
                         <img className="w-full h-full object-cover bg-cover rounded-lg brightness-100" src="https://i.pinimg.com/736x/44/db/f3/44dbf3252affe1b050eef4b7ea01c988.jpg" alt="Samsung S24 Ultra" /> 
                 </div>
