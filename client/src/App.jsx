@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import ErrorPage from './pages/Errorpage'
 import Chat from './components/Chat'
 import { AuthProvider } from "./context/authContext"
+import PostsComents from './components/PostsComents'
 
  function App() {
 
@@ -23,8 +24,8 @@ import { AuthProvider } from "./context/authContext"
         { path: '/chat', element: <Chat /> },
     /*  { path: '/CreatePosts', element: <CreatePosts /> },
         { path: '/PostsProfile', element: <PostsProfile /> },
-        { path: '/Profile', element: <Profile /> }, 
-        { path: '/PostsComments', element: <PostsComments /> }, */
+        { path: '/Profile', element: <Profile /> }, */
+        { path: '/PostsComments', element: <PostsComents /> }, 
       ],
     }
   ])
