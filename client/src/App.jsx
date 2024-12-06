@@ -6,8 +6,13 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import ErrorPage from './pages/Errorpage'
 import Chat from './components/Chat'
+//import Profile from './pages/Profile'
 import { AuthProvider } from "./context/authContext"
+import { UsersProvider } from './context/users.context'
+import { PostProvider } from './context/postContext'
+import { ForumProvider } from './context/forum.context'
 import PostsComents from './components/PostsComents'
+
 
  function App() {
 
@@ -22,6 +27,9 @@ import PostsComents from './components/PostsComents'
         { path: '/login', element: <Login /> },
         { path: '/register', element: <Register /> },
         { path: '/chat', element: <Chat /> },
+        /*  { path: '/CreatePosts', element: <CreatePosts /> },
+        { path: '/Profile', element: <Profile /> }, 
+        { path: '/PostsProfile', element: <PostsProfile /> },
     /*  { path: '/CreatePosts', element: <CreatePosts /> },
         { path: '/PostsProfile', element: <PostsProfile /> },
         { path: '/Profile', element: <Profile /> }, */
@@ -35,7 +43,13 @@ import PostsComents from './components/PostsComents'
   return (
     <>
     <AuthProvider>
+    <UsersProvider>
+    <ForumProvider>
+    <PostProvider>
     <RouterProvider router={router}/>
+    </PostProvider>
+    </ForumProvider>
+    </UsersProvider>
     </AuthProvider>
     </>
 
