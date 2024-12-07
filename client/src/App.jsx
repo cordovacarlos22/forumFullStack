@@ -6,7 +6,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import ErrorPage from './pages/Errorpage'
 import Chat from './components/Chat'
-//import Profile from './pages/Profile'
+import Profile from './pages/Profile'
 import { AuthProvider } from "./context/authContext"
 import { UsersProvider } from './context/users.context'
 import { PostProvider } from './context/postContext'
@@ -27,8 +27,8 @@ import PostsComents from './components/PostsComents'
         { path: '/login', element: <Login /> },
         { path: '/register', element: <Register /> },
         { path: '/chat', element: <Chat /> },
+        { path: '/profile/:userId', element: <Profile /> }, 
         /*  { path: '/CreatePosts', element: <CreatePosts /> },
-        { path: '/Profile', element: <Profile /> }, 
         { path: '/PostsProfile', element: <PostsProfile /> },
     /*  { path: '/CreatePosts', element: <CreatePosts /> },
         { path: '/PostsProfile', element: <PostsProfile /> },
@@ -44,11 +44,11 @@ import PostsComents from './components/PostsComents'
     <>
     <AuthProvider>
     <UsersProvider>
-    <ForumProvider>
     <PostProvider>
+    <ForumProvider>
     <RouterProvider router={router}/>
-    </PostProvider>
     </ForumProvider>
+    </PostProvider>
     </UsersProvider>
     </AuthProvider>
     </>
