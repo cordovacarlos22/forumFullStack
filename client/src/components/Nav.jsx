@@ -55,7 +55,7 @@ const Nav = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <svg
-              className="w-[48px] h-[48px] text-gray-800 dark:text-white"
+              className="w-[48px] h-[48px]  text-white"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -67,7 +67,7 @@ const Nav = () => {
                 d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"
               />
             </svg>
-            <span className="text-2xl font-semibold dark:text-white">
+            <span className="text-2xl font-semibold d text-white">
               MushRoom-Forum
             </span>
           </Link>
@@ -95,7 +95,7 @@ const Nav = () => {
                 placeholder="Search..."
                 value={searchInput}
                 onChange={handleSearch}
-                className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className="block w-full p-4 pl-10 text-sm  border  rounded-lg  focus:ring-blue-500 focus:border-blue-500 bg-gray-700 border-gray-600  placeholder-gray-400 text-white"
               />
               {searchInput && (
                 <button
