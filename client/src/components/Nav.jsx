@@ -1,9 +1,7 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { getMyUserService } from "../services/user.service";
-import Aside from "./Aside";
-import { Link } from "react-router-dom";
 const Nav = () => {
   const { autenticated, logout, userPayload } = useAuthContext();
   const [user, setUser] = useState(null);
@@ -111,6 +109,7 @@ const Nav = () => {
                   </button>
                 </NavLink>
                 {user && (
+                  <NavLink to={`/profile/${user.user._id}`}>
                   <button
                     type="button"
                     className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -121,6 +120,7 @@ const Nav = () => {
                       className="w-[41px] h-[41px] rounded-full object-cover"
                     />
                   </button>
+                  </NavLink>
                 )}
               </>
             ) : (
