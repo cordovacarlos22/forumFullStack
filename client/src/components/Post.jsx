@@ -10,7 +10,7 @@ function Post({ id, title, content, postImage }) {
             </section>
             <section
                 key={id}
-                className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16"
+                className=" py-8 antialiased bg-gray-900 md:py-16"
             >
                 <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
                     <div className="w-full h-full">
@@ -24,20 +24,20 @@ function Post({ id, title, content, postImage }) {
                                         src="https://i.pinimg.com/736x/d3/5f/70/d35f709f7ecd27747a231b0da3d5c55f.jpg"
                                         alt="User Avatar"
                                     />
-                                    <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                                    <p className="text-lg font-semibold  text-white">
                                         tech
                                     </p>
                                 </div>
                                 <div className="text-center md:text-left">
-                                    <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
+                                    <h1 className="text-xl font-semibold  text-white">
                                         {title}
                                     </h1>
-                                    <p className="text-gray-600 dark:text-gray-400 mt-2">{content}</p>
+                                    <p className=" text-gray-400 mt-2">{content}</p>
                                 </div>
                                 <div className="text-right">
                                     <button
                                         type="button"
-                                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                        className="text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700"
                                     >
                                         Follow
                                     </button>
@@ -58,7 +58,7 @@ function Post({ id, title, content, postImage }) {
                                 <div className="flex items-center space-x-3">
                                     <button>
                                         <svg
-                                            className="w-8 h-8 text-gray-800 dark:text-white hover:text-orange-600"
+                                            className="w-8 h-8  text-white hover:text-orange-600"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"
@@ -74,7 +74,7 @@ function Post({ id, title, content, postImage }) {
                                 <div className="flex items-center space-x-3">
                                     <button>
                                         <svg
-                                            className="w-8 h-8 text-gray-800 dark:text-white hover:text-orange-600"
+                                            className="w-8 h-8  text-white hover:text-orange-600"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"

@@ -20,7 +20,7 @@ const Aside = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleSidebar}
-        className="fixed  md:top-36 left-4 z-50 p-3 bg-gray-800 text-white rounded focus:outline-none"
+        className="fixed top-28 left-4 z-50 p-3 bg-gray-800 text-white rounded focus:outline-none"
         aria-label="Toggle Sidebar"
       >
         {isSidebarOpen ? "Close" : "Menu"}
@@ -30,7 +30,7 @@ const Aside = () => {
       {isSidebarOpen && (
         <aside
           id="default-sidebar"
-          className="fixed top-56  left-0 z-40 w-full h-full bg-gray-50 dark:bg-gray-800 transform transition-transform"
+          className="fixed top-28  left-0 z-40 w-full h-full bg-gray-800 transform transition-transform"
           aria-label="Sidebar"
         >
           <div className="h-full px-3 py-4 overflow-y-auto">
