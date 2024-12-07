@@ -10,9 +10,10 @@ import Aside from "../components/Aside";
 const Profile = () => {
   const { userId } = useParams(); // Obtener el id del usuario
   const { users } = useContext(UsersContext); // Obtener todos los usuarios
-  const { userPayload, autenticated } = useAuthContext(); // token viene del contexto
+  const { userPayload } = useAuthContext(); // token viene del contexto
   const { forums } = useContext(ForumContext);
   const [myProfile, setMyProfile] = useState()
+  const [selectedButton, setSelectedButton] = useState('overview');
 
   const user = users.find(user => user._id === userId)
 
@@ -33,6 +34,14 @@ const Profile = () => {
     )
   }
 
+  const userPosts = forums.flatMap(forum =>
+    forum.posts.filter(post => post.author._id === userId)
+  )
+
+  const handleButtonClick = (buttonName) => {
+    setSelectedButton(buttonName);
+  }
+  
   return (
     <div className="md:flex w-screen min-h-screen bg-gray-900">
       {/* Aside Section */}
@@ -49,37 +58,64 @@ const Profile = () => {
 
         {/* User Info */}
         <section className="p-4">
-          
-
             <div className="flex items-center space-x-4">
               <img
                 src={user.avatar}
                 alt="User Avatar"
                 className="rounded-full w-16 h-16"
               />
-              <p>{user.firstName}</p>
-              <p>{user.email}</p>
+              <p className="font-bold">{user.firstName}</p>
+              <p className="font-bold">{user.email}</p>
             </div>
-          
         </section>
 
-        {/* Forum Posts */}
-        <section className="p-4 space-y-4">
-          {forums && forums.length > 0 ? (
-            forums.map((forum) =>
-              forum.posts.map((post) => (
-                <Post
-                  key={post._id}
-                  id={post._id}
-                  title={post.title}
-                  forum={forum.title} // Verify if this should be "title"
-                  content={post.content}
-                  postImage={post.image[0]}
-                />
-              ))
-            )
+        <section>
+          <div className="w-full h-px bg-gray-700 m-4 ">
+            <div>
+            <button
+             className={`hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full m-4 ${selectedButton === "overview" ? "bg-gray-700" : ""}`}
+             onClick={() => handleButtonClick('overview')}
+             >
+              Overview
+              </button>
+            <button
+             className={`hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full m-4 ${selectedButton === "posts" ? "bg-gray-700" : ""}`}
+             onClick={() => handleButtonClick('posts')}
+             >
+              Posts
+              </button>
+            <button
+             className={`hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full m-4 ${selectedButton === "comments" ? "bg-gray-700" : ""}`}
+             onClick={() => handleButtonClick('comments')}
+             >
+              Comments
+              </button>
+            {myProfile && (
+              <>
+              <button className=" hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full ml-4">Edit Profile</button>
+              <button className=" hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ml-4">Delete Profile</button> 
+              </>
+            )}
+            </div>
+          </div>
+        </section>
+
+        {/* User Forum Posts */}
+        <section className="p-4 mt-8 space-y-4">
+        {myProfile || userPosts && userPosts.length > 0 ? (
+            userPosts.map((post) => (
+              <Post
+                key={post._id}
+                id={post._id}
+                title={post.title}
+                forum={forums.find(forum => forum.posts.includes(post))?.title} // Título del foro
+                content={post.content}
+                postImage={post.image[0]}
+                //boton para borrar el post desde el perfil
+              />
+            ))
           ) : (
-            <p>No forums or posts available</p>
+            <p className="text-gray-400 flex justify-center mt-8"> {user.firstName} has not made any posts yet.</p>
           )}
         </section>
       </main>
