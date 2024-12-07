@@ -20,9 +20,14 @@ const getAllForums = async (req, res) => {
 
   try {
     const forums = await Forum.find({ isActive: true })
-    .populate({ path: "posts", select: "_id title content image author",
-      populate: { path: "author", select: "_id firstName lastName"}
-    })
+      .populate({
+        path: "posts",
+        select: "_id title content image author",
+        populate: {
+          path: "author", // Populate the author field within posts
+          select: "firstName lastName email avatar", // Specify the fields to include from the author collection
+        },
+      });
     if (!forums) return res.status(404).json({ message: 'No Forums Were Found!' });
 
     res.status(200).json(forums);
@@ -37,11 +42,14 @@ const getForumById = async (req, res) => {
     return res.status(400).json({ message: 'Invalid post ID' })
   }
   try {
-    const forum = await Forum.find({ _id: req.params.forumId, isActive: true })
-    .populate({
-      path: "posts", select: "_id title content image author",
-      populate: { path: "author", select: "_id firstName lastName" },
-    })
+    const forum = await Forum.find({ _id: req.params.forumId, isActive: true }).populate({
+      path: "posts",
+      select: "_id title content image author",
+      populate: {
+        path: "author", // Populate the author field within posts
+        select: "firstName lastName email avatar", // Specify the fields to include from the author collection
+      },
+    });
     if (!forum) return res.status(404).json({ message: 'No Forum Was Found!' });
 
     res.status(200).json(forum);
@@ -57,8 +65,14 @@ const updateForumById = async (req, res) => {
     return res.status(400).json({ message: 'Invalid post ID' })
   }
   try {
-    const forum = await Forum.findByIdAndUpdate(req.params.forumId, req.body, { new: true }).populate("posts", "_id title content image author ");
-
+    const forum = await Forum.findByIdAndUpdate(req.params.forumId, req.body, { new: true }).populate({
+      path: "posts",
+      select: "_id title content image author",
+      populate: {
+        path: "author", // Populate the author field within posts
+        select: "firstName lastName email avatar", // Specify the fields to include from the author collection
+      },
+    });
     if (!forum) return res.status(404).json({ message: 'No Forum Was Found!' });
 
     res.status(200).json(forum);
