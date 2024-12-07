@@ -19,7 +19,10 @@ const createForum = async (req, res) => {
 const getAllForums = async (req, res) => {
 
   try {
-    const forums = await Forum.find({ isActive: true }).populate("posts", "_id title content image author ");
+    const forums = await Forum.find({ isActive: true })
+    .populate({ path: "posts", select: "_id title content image author",
+      populate: { path: "author", select: "_id firstName lastName"}
+    })
     if (!forums) return res.status(404).json({ message: 'No Forums Were Found!' });
 
     res.status(200).json(forums);
@@ -34,7 +37,11 @@ const getForumById = async (req, res) => {
     return res.status(400).json({ message: 'Invalid post ID' })
   }
   try {
-    const forum = await Forum.find({ _id: req.params.forumId, isActive: true }).populate("posts", "_id title content image author ");
+    const forum = await Forum.find({ _id: req.params.forumId, isActive: true })
+    .populate({
+      path: "posts", select: "_id title content image author",
+      populate: { path: "author", select: "_id firstName lastName" },
+    })
     if (!forum) return res.status(404).json({ message: 'No Forum Was Found!' });
 
     res.status(200).json(forum);
