@@ -67,12 +67,12 @@ const Aside = () => {
       )}
 
       {/* Overlay */}
-      {isSidebarOpen && (
+      {/* {isSidebarOpen && (
         <div
           onClick={toggleSidebar}
           className="fixed inset-0 bg-black bg-opacity-50 z-30"
         ></div>
-      )}
+      )} */}
     </div>
   );
 };
