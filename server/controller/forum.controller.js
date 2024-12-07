@@ -25,7 +25,11 @@ const getAllForums = async (req, res) => {
         select: "_id title content image author",
         populate: {
           path: "author", // Populate the author field within posts
-          select: "firstName lastName email avatar", // Specify the fields to include from the author collection
+          select: "firstName lastName email avatar",// Specify the fields to include from the author collection
+          path: "likes",
+          select: "postId", // Exclude the _id field from the likes array
+          path: "comments",
+          select: "content",
         },
       });
     if (!forums) return res.status(404).json({ message: 'No Forums Were Found!' });
