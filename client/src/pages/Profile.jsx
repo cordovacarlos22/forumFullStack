@@ -24,7 +24,12 @@ const Profile = () => {
     } else {
       setMyProfile(false);
     }
+    
   }, [user, userPayload]);
+
+  useEffect(() => {
+    setSelectedButton('overview');
+  }, [userId]);
 
   if (!user) {
     return (
