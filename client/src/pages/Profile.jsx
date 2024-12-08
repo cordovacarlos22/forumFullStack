@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import Coment from "../components/Coment";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
-import Overview from "../components/overview";
+import Overview from "../components/Overview";
 
 // import { useParams } from "react-router-dom";
 const Profile = () => {
