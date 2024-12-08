@@ -12,6 +12,7 @@ import { PostProvider } from "./context/postContext";
 import { ForumProvider } from "./context/forum.context";
 import { ComentProvider } from "./context/comments.context";
 import PostsComents from "./components/PostsComents";
+import CreatePosts from "./pages/CreatePost";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,7 +27,8 @@ function App() {
         { path: "/register", element: <Register /> },
         { path: "/chat", element: <Chat /> },
         { path: "/profile/:userId", element: <Profile /> },
-        /*  { path: '/CreatePosts', element: <CreatePosts /> },
+        { path: '/createpost', element: <CreatePosts /> },
+        /*  ,
         { path: '/PostsProfile', element: <PostsProfile /> },
     /*  { path: '/CreatePosts', element: <CreatePosts /> },
         { path: '/PostsProfile', element: <PostsProfile /> },
