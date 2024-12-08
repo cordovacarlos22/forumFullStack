@@ -50,7 +50,7 @@ const Aside = () => {
               {navLinksAside.map((link) => (
                 <li key={link.name}>
                   <button
-                    onClick={() => handleCategoryClick(link.name)}
+                    onClick={() => handleCategoryClick(link.value)}
                     className={`w-full p-2 text-left rounded ${
                       selectedCategory === link.name
                         ? "bg-gray-600"

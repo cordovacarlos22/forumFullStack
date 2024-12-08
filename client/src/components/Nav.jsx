@@ -12,12 +12,12 @@ const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false); // State for menu toggle
 
   const handleSearch = (e) => {
-    setSearchInput(e.target.value);
+    setSearchInput(e.target.value.trim().toLowerCase());
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchTerm(searchInput);
+    setSearchTerm(searchInput.trim().toLowerCase());
   };
 
   const clearSearch = () => {

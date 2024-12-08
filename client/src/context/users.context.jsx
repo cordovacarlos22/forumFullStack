@@ -9,6 +9,10 @@ const UsersProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchUsers = async () => {
+
+            if (!token) {
+                return
+            }
             try {
                 const response = await fetch(`${mainUrl}/user`, {
                     headers: {
