@@ -7,6 +7,11 @@ import Forum from "../models/forum.model.js";
 const createPost = async (req, res) => {
   const { title, content, forumId } = req.body; // Expect `forumId` in the request body
 
+  // Check for authenticated user
+  if (!req.userId) {
+    return res.status(401).json({ message: "Unauthorized: Missing user ID" });
+  }
+
   // Validate required data
   if (!title || !content || !forumId) {
     return res.status(400).json({
