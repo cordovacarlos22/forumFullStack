@@ -8,4 +8,5 @@ export const navLinksAside = [
 export const navLiks = [
   { name: "Home", path: "/" },
   { name: "Create Post", path: "/createpost" },
+  { name: "Create Forum", path: "/createforum" },
 ]
