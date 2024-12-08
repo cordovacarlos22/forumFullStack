@@ -4,14 +4,22 @@ import { useAuthContext } from "../hooks/useAuth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { useContext } from "react";
+import { ForumContext } from "../context/forum.context";
+
 const Form = ({ isConnected }) => {
   const { userPayload } = useAuthContext()
- // const { firstName } = userPayload
+  // const { firstName } = userPayload
   const [message, setMessage] = useState('');
-  const [isloading, setLoading] = useState(false);
   const [room, setRoom] = useState("");
 
-  const rooms = ["Room 1", "Room 2", "Room 3"];
+
+
+  const { filteredForums, loading } = useContext(ForumContext);
+
+  const test = filteredForums.map(item => item.title);
+
+  const rooms = test;
   const joinRoom = () => {
     // Simulate joining a room
     if (!room) {
@@ -44,7 +52,7 @@ const Form = ({ isConnected }) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     // Simulate sending message
     if (message === '' || !room) {
       toast.error('make sure message or room not empty', {
@@ -57,12 +65,12 @@ const Form = ({ isConnected }) => {
         progress: undefined,
         theme: "light"
       });
-      setLoading(false);
+      // setLoading(false);
       return;
     }
     socket.timeout(5000).emit('user-message', { user: `${userPayload.firstName}`, message, room }, () => {
 
-      setLoading(false);
+      // setLoading(false);
     })
 
     setMessage('');
@@ -87,8 +95,8 @@ const Form = ({ isConnected }) => {
                 onChange={(e) => setRoom(e.target.value)}
               >
                 <option value="" disabled>Select a room</option>
-                {rooms.map((room, index) => (
-                  <option key={index} value={`room  ${index + 1}`}>
+                {rooms.map((room,index) => (
+                  <option key={index} value={`room  ${room}`}>
                     {room}
                   </option>
                 ))}
