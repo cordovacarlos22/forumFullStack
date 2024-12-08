@@ -47,29 +47,27 @@ const ForumProvider = ({ children }) => {
     }, []);
 
     const filteredForums = forums
-        .filter((forum) => {
-            const term = searchTerm?.trim().toLowerCase();
-            const forumMatches =
-                forum.title?.toLowerCase().includes(term) ||
-                forum.category?.toLowerCase().includes(term) ||
-                forum.description?.toLowerCase().includes(term);
-            const postMatches = forum.posts?.some((post) => {
-                const postTitleMatches = post.title?.toLowerCase().includes(term);
-                const postContentMatches = post.content?.toLowerCase().includes(term);
-                return postTitleMatches || postContentMatches;
-            });
-            return forumMatches || postMatches;
-        })
-        .map((forum) => ({
-            ...forum,
-            posts: forum.posts?.filter((post) => {
-                const postTitleMatches = post.title?.toLowerCase().includes(searchTerm?.toLowerCase());
-                const postContentMatches = post.content?.toLowerCase().includes(searchTerm?.toLowerCase());
-                return postTitleMatches || postContentMatches;
-            }),
-        }))
-        .filter((forum) => forum.posts?.length > 0 || forum.category?.toLowerCase().includes(searchTerm) || forum.title?.toLowerCase().includes(searchTerm));
+        .map((forum) => {
+            const forumTitleMatches = forum.title?.toLowerCase().includes(searchTerm.toLowerCase());
 
+            const filteredPosts = forum.posts?.filter((post) => {
+                const postMatches = post.title?.toLowerCase().includes(searchTerm.toLowerCase()) 
+                const authorMatches = post.author?.firstName?.toLowerCase().includes(searchTerm.toLowerCase());
+                return postMatches || authorMatches;
+            });
+
+            if (forumTitleMatches || (filteredPosts && filteredPosts.length > 0)) {
+                return {
+                    ...forum,
+                    posts: filteredPosts,
+                };
+            }
+
+            return null;
+        })
+        .filter((forum) => forum !== null)
+        .filter((forum) => selectedCategory === '' || forum.category?.toLowerCase() === selectedCategory.toLowerCase());
+    
     const data = {
         forums,
         setForums,
