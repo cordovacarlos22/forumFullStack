@@ -17,26 +17,32 @@ const createForum = async (req, res) => {
 };
 
 const getAllForums = async (req, res) => {
-
   try {
     const forums = await Forum.find({ isActive: true })
       .populate({
         path: "posts",
         select: "_id title content image author",
-        populate: {
-          path: "author", // Populate the author field within posts
-          select: "firstName lastName email avatar",// Specify the fields to include from the author collection
-          path: "likes",
-          select: "postId", // Exclude the _id field from the likes array
-          path: "comments",
-          select: "content",
-        },
+        populate: [
+          {
+            path: "author", // Populate the author field within posts
+            select: "firstName lastName email avatar" // Specify the fields to include from the author collection
+          },
+          {
+            path: "likes",
+            select: "postId" // Specify fields for the likes array
+          },
+          {
+            path: "comments",
+            select: "content" // Specify fields for the comments array
+          }
+        ]
       });
+
     if (!forums) return res.status(404).json({ message: 'No Forums Were Found!' });
 
     res.status(200).json(forums);
   } catch (error) {
-    res.status(400).json({ message: error.message })
+    res.status(400).json({ message: error.message });
   }
 };
 
@@ -49,10 +55,20 @@ const getForumById = async (req, res) => {
     const forum = await Forum.find({ _id: req.params.forumId, isActive: true }).populate({
       path: "posts",
       select: "_id title content image author",
-      populate: {
-        path: "author", // Populate the author field within posts
-        select: "firstName lastName email avatar", // Specify the fields to include from the author collection
-      },
+      populate: [
+        {
+          path: "author", // Populate the author field within posts
+          select: "firstName lastName email avatar" // Specify the fields to include from the author collection
+        },
+        {
+          path: "likes",
+          select: "postId" // Specify fields for the likes array
+        },
+        {
+          path: "comments",
+          select: "content" // Specify fields for the comments array
+        }
+      ]
     });
     if (!forum) return res.status(404).json({ message: 'No Forum Was Found!' });
 
