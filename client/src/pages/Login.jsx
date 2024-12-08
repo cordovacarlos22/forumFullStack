@@ -56,7 +56,7 @@ const Login = () => {
         }, 2000);
       }
     } catch (error) {
-      toast.error(`please verify credentials ${error.message}`, {
+      toast.error(`please verify credentials `, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,

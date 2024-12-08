@@ -1,8 +1,11 @@
 export const navLinksAside = [
-  { name: '🧑‍💻Technology', value: 'Technology' },
-  { name: '🚀 Games', value: 'games' },
-  { name: '❤️ Life Style', value: 'lifestyle' },
-  { name: '😂 Memes', value: 'memes' },
-  
-
+  { name: "Tech", value: "tech" },
+  { name: "Games", value: "games" },
+  { name: "Lifestyle", value: "lifestyle" },
+  { name: "Memes", value: "memes" },
 ];
+
+export const navLiks = [
+  { name: "Home", path: "/" },
+  { name: "Create Post", path: "/createpost" },
+]
