@@ -4,7 +4,7 @@ const CommentContext = createContext()
 
 const ComentProvider = ({ children }) => {
     const mainUrl = import.meta.env.VITE_FORO_API
-    const [comments, setComments] = useState([])
+    const [coments, setComents] = useState([])
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -15,7 +15,7 @@ const ComentProvider = ({ children }) => {
                 }
                 const data = await response.json()
                 console.log('Fetched comments:', data);
-                setComments(data)
+                setComents(data)
             } catch (error) {
                 console.error('Error fetching comments:', error);
             }
@@ -25,7 +25,7 @@ const ComentProvider = ({ children }) => {
     }, [])
 
     return (
-        <CommentContext.Provider value={{ comments, setComments }}>
+        <CommentContext.Provider value={{ coments, setComents }}>
             {children}
         </CommentContext.Provider>
     )
