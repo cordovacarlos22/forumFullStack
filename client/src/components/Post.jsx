@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Post({ id, title, content, postImage, likes }) {
     return (
         <section
@@ -8,34 +10,37 @@ function Post({ id, title, content, postImage, likes }) {
                 <div className="w-full h-full">
                     {/* Card Container */}
                     <div className="p-6 sm:p-8 md:p-10 lg:p-12 rounded-xl border border-stone-200">
-                        {/* Header Section */}
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-                            <div className="flex items-center space-x-3">
-                                <img
-                                    className="w-10 h-10 rounded-full"
-                                    src="https://i.pinimg.com/736x/d3/5f/70/d35f709f7ecd27747a231b0da3d5c55f.jpg"
-                                    alt="User Avatar"
-                                />
-                                <p className="text-lg font-semibold text-white">
-                                    tech
-                                </p>
+                        <Link
+                            to={`/post/${id}`}>
+                            {/* Header Section */}
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                                <div className="flex items-center space-x-3">
+                                    <img
+                                        className="w-10 h-10 rounded-full"
+                                        src="https://i.pinimg.com/736x/d3/5f/70/d35f709f7ecd27747a231b0da3d5c55f.jpg"
+                                        alt="User Avatar"
+                                    />
+                                    <p className="text-lg font-semibold text-white">
+                                        tech
+                                    </p>
+                                </div>
+                                <div className="text-center md:text-left">
+                                    <h1 className="text-xl font-semibold text-white">
+                                        {title}
+                                    </h1>
+                                    <p className="text-gray-400 mt-2">{content}</p>
+                                </div>
                             </div>
-                            <div className="text-center md:text-left">
-                                <h1 className="text-xl font-semibold text-white">
-                                    {title}
-                                </h1>
-                                <p className="text-gray-400 mt-2">{content}</p>
-                            </div>
-                        </div>
 
-                        {/* Image Section */}
-                        <div className="flex items-center justify-center mt-6">
-                            <img
-                                className="w-full max-w-lg h-auto object-cover rounded-lg shadow-md"
-                                src={postImage}
-                                alt={title}
-                            />
-                        </div>
+                            {/* Image Section */}
+                            <div className="flex items-center justify-center mt-6">
+                                <img
+                                    className="w-full max-w-lg h-auto object-cover rounded-lg shadow-md"
+                                    src={postImage}
+                                    alt={title}
+                                />
+                            </div>
+                        </Link>
 
                         {/* Footer Section */}
                         <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
