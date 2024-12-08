@@ -14,6 +14,7 @@ import { ComentProvider } from "./context/comments.context";
 import PostsComents from "./components/PostsComents";
 import CreatePosts from "./pages/CreatePost";
 import PostDetail from "./pages/PostDetail";
+import CreateForum from "./pages/CreateForum";
 
 function App() {
   const router = createBrowserRouter([
@@ -29,6 +30,7 @@ function App() {
         { path: "/chat", element: <Chat /> },
         { path: "/profile/:userId", element: <Profile /> },
         { path: '/createpost', element: <CreatePosts /> },
+        { path: '/createforum', element: <CreateForum /> },
         { path: '/post/:id', element: <PostDetail /> },
         /*  ,
         { path: '/PostsProfile', element: <PostsProfile /> },

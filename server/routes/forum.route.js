@@ -4,9 +4,9 @@ const forumRoutes = express.Router();
 import { isAdmin } from '../middlewares/isAdmin.js';
 import { isAuth } from '../middlewares/isAuth.js';
 import { isTheSameUser } from '../middlewares/isTheSameUser.js';
-
+import { isAuth } from '../middlewares/isAuth.js';
 // create a new forum with title, description and posts array
-forumRoutes.post('/forum', forumController.createForum);
+forumRoutes.post('/forum',isAuth, forumController.createForum);
 
 // get all forums
 forumRoutes.get('/forum', forumController.getAllForums);
