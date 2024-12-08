@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Coment from "../components/Coment";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
+import Overview from "../components/overview";
 
 // import { useParams } from "react-router-dom";
 const Profile = () => {
@@ -14,7 +15,7 @@ const Profile = () => {
   const { users } = useContext(UsersContext); // Obtener todos los usuarios
   const { userPayload } = useAuthContext(); // token viene del contexto
   const { forums } = useContext(ForumContext);
-  const { comments } = useContext(CommentContext);
+  const { coments } = useContext(CommentContext);
   const [myProfile, setMyProfile] = useState();
   const [selectedButton, setSelectedButton] = useState("");
 
@@ -41,9 +42,7 @@ const Profile = () => {
     forum.posts.filter((post) => post.author._id === userId)
   );
 
-  const userComments = comments.filter(
-    (comment) => comment.userId._id === userId
-  );
+  const userComents = coments.filter((coment) => coment.userId._id === userId);
 
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
@@ -121,31 +120,59 @@ const Profile = () => {
         <section className="p-4 mt-8 space-y-4">
           {selectedButton === "overview" && (
             <div>
-              {myProfile || (userPosts && userPosts.length > 0) ? (
-                userPosts.map((post) => (
-                  <Post
-                    key={post._id}
-                    id={post._id}
-                    title={post.title}
-                    forum={
-                      forums.find((forum) => forum.posts.includes(post))?.title
-                    } // Título del foro
-                    content={post.content}
-                    postImage={post.image[0]}
-                    //boton para borrar el post desde el perfil
-                  />
-                ))
-              ) : (
-                <p className="text-gray-400 flex justify-center mt-8">
-                  {user.firstName} has not posted yet.
-                </p>
-              )}
+              <Overview>
+                {userPosts && userPosts.length > 0 ? (
+                  userPosts.map((post) => (
+                    <Post
+                      key={post._id}
+                      id={post._id}
+                      title={post.title}
+                      forum={
+                        forums.find((forum) => forum.posts.includes(post))
+                          ?.title
+                      }
+                      content={post.content}
+                      postImage={post.image[0]}
+                    />
+                  ))
+                ) : myProfile ? (
+                  <p className="text-gray-400 flex justify-center mt-8">
+                    You haven$apos;t posted anything yet.
+                  </p>
+                ) : (
+                  <p className="text-gray-400 flex justify-center mt-8">
+                    {user.firstName} has not posted yet.
+                  </p>
+                )}
+
+                {userComents && userComents.length > 0 ? (
+                  userComents.map((coment) => (
+                    <Coment
+                      key={coment._id}
+                      id={coment._id}
+                      firstName={user.firstName}
+                      lastName={user.lastName}
+                      avatar={user.avatar}
+                      content={coment.content}
+                      //boton para borrar el post desde el perfil
+                    />
+                  ))
+                ) : myProfile ? (
+                  <p className="text-gray-400 flex justify-center mt-8">
+                    You haven'$apos;'t comented anything yet.
+                  </p>
+                ): (
+                  <p className="text-gray-400 flex justify-center mt-8">
+                    {user.firstName} hasn't comented yet.
+                  </p>
+                )}
+              </Overview>
             </div>
           )}
 
           {selectedButton === "posts" && (
             <div>
-              {myProfile || (userPosts && userPosts.length > 0) ? (
+              {userPosts && userPosts.length > 0 ? (
                 userPosts.map((post) => (
                   <Post
                     key={post._id}
@@ -153,15 +180,18 @@ const Profile = () => {
                     title={post.title}
                     forum={
                       forums.find((forum) => forum.posts.includes(post))?.title
-                    } // Título del foro
+                    }
                     content={post.content}
                     postImage={post.image[0]}
-                    //boton para borrar el post desde el perfil
                   />
                 ))
+              ) : myProfile ? (
+                <p className="text-gray-400 flex justify-center mt-8">
+                  You haven't posted anything yet.
+                </p>
               ) : (
                 <p className="text-gray-400 flex justify-center mt-8">
-                  {user.firstName} has not posted yet.
+                  {user.firstName} hasn't posted yet.
                 </p>
               )}
             </div>
@@ -169,18 +199,26 @@ const Profile = () => {
 
           {selectedButton === "comments" && (
             <div>
-              {myProfile || (userComments && userComments.length > 0) ? (
-                userComments.map((comment) => (
+              {userComents && userComents.length > 0 ? (
+                userComents.map((coment) => (
                   <Coment
-                    key={comment._id}
-                    id={comment._id}
-                    content={comment.content}
+                    key={coment._id}
+                    id={coment._id}
+                    firstName={user.firstName}
+                    lastName={user.lastName}
+                    avatar={user.avatar}
+                    content={coment.content}
                     //boton para borrar el post desde el perfil
                   />
                 ))
-              ) : (
+              ) : myProfile ? (
                 <p className="text-gray-400 flex justify-center mt-8">
-                  {user.firstName} has not commented yet.
+                  You haven't commented anything yet.
+                </p>
+              ):(
+                <p className="text-gray-400 flex justify-center mt-8">
+                  {user.firstName} hasn't commented yet.
+                  
                 </p>
               )}
             </div>
