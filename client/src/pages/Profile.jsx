@@ -233,7 +233,11 @@ const Profile = () => {
           )}
         </section>
           {modalOpen && (
-            <Modal setModalOpen={setModalOpen} selectedButton={selectedButton} />
+            <Modal 
+            setModalOpen={setModalOpen} 
+            selectedButton={selectedButton} 
+            setSelectedButton={setSelectedButton}
+            />
           )}
         
       </main>
