@@ -8,6 +8,7 @@ import Coment from "../components/Coment";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
 import Overview from "../components/Overview";
+import Modal from "../components/Modal";
 
 // import { useParams } from "react-router-dom";
 const Profile = () => {
@@ -18,6 +19,7 @@ const Profile = () => {
   const { coments } = useContext(CommentContext);
   const [myProfile, setMyProfile] = useState();
   const [selectedButton, setSelectedButton] = useState("");
+  const [modalOpen, setModalOpen] = useState(false)
 
   const user = users.find((user) => user._id === userId);
 
@@ -104,12 +106,19 @@ const Profile = () => {
               </button>
               {myProfile && (
                 <>
-                  <button className=" hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full ml-4">
+                  <button 
+                  className=" hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full ml-4"
+                  onClick={() => {setModalOpen(true), setSelectedButton('edit')}}
+                  >
                     Edit Profile
                   </button>
-                  <button className=" hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ml-4">
+                  <button 
+                  className=" hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ml-4"
+                  onClick={() => {setModalOpen(true), setSelectedButton('delete')}}
+                  >
                     Delete Profile
                   </button>
+                  
                 </>
               )}
             </div>
@@ -159,9 +168,9 @@ const Profile = () => {
                   ))
                 ) : myProfile ? (
                   <p className="text-gray-400 flex justify-center mt-8">
-                    You haven'$apos;'t comented anything yet.
+                    You haven't comented anything yet.
                   </p>
-                ): (
+                ) : (
                   <p className="text-gray-400 flex justify-center mt-8">
                     {user.firstName} hasn't comented yet.
                   </p>
@@ -215,15 +224,18 @@ const Profile = () => {
                 <p className="text-gray-400 flex justify-center mt-8">
                   You haven't commented anything yet.
                 </p>
-              ):(
+              ) : (
                 <p className="text-gray-400 flex justify-center mt-8">
                   {user.firstName} hasn't commented yet.
-                  
                 </p>
               )}
             </div>
           )}
         </section>
+          {modalOpen && (
+            <Modal setModalOpen={setModalOpen} selectedButton={selectedButton} />
+          )}
+        
       </main>
     </div>
   );
