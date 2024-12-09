@@ -2,7 +2,6 @@ import express from 'express';
 import * as forumController from '../controller/forum.controller.js'
 const forumRoutes = express.Router();
 import { isAdmin } from '../middlewares/isAdmin.js';
-import { isAuth } from '../middlewares/isAuth.js';
 import { isTheSameUser } from '../middlewares/isTheSameUser.js';
 import { isAuth } from '../middlewares/isAuth.js';
 // create a new forum with title, description and posts array
