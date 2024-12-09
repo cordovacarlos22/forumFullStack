@@ -33,8 +33,13 @@ const getAllForums = async (req, res) => {
           },
           {
             path: "comments",
-            select: "content" // Specify fields for the comments array
+            select: "postId userId content", // Specify fields for the comments array
+            populate: {
+              path: "userId", // Nested population of the userId field
+              select: "firstName lastName avatar" // Fields to include for userId
+            }
           }
+          
         ]
       });
 
@@ -66,7 +71,11 @@ const getForumById = async (req, res) => {
         },
         {
           path: "comments",
-          select: "content" // Specify fields for the comments array
+          select: "postId userId content", // Specify fields for the comments array
+          populate: {
+            path: "userId", // Nested population of the userId field
+            select: "firstName lastName avatar" // Fields to include for userId
+          }
         }
       ]
     });
