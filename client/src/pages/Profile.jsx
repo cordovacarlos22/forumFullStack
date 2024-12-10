@@ -113,6 +113,12 @@ const Profile = () => {
                     Edit Profile
                   </button>
                   <button 
+                  className=" hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full ml-4"
+                  onClick={() => {setModalOpen(true), setSelectedButton('password')}}
+                  >
+                    Change Password
+                  </button>
+                  <button 
                   className=" hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ml-4"
                   onClick={() => {setModalOpen(true), setSelectedButton('delete')}}
                   >
