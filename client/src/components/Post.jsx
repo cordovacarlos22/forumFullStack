@@ -9,6 +9,7 @@ function Post({ id, title, content, postImage, likesCount }) {
     const [like, setLike] = useState(likesCount); // Local state for likes
     const [isLiking, setIsLiking] = useState(false); // For button feedback
 
+
     useEffect(() => {
 
         if (!socket.connected) {
@@ -36,6 +37,14 @@ function Post({ id, title, content, postImage, likesCount }) {
         const token = localStorage.getItem("token");
         if (isLiking) return; // Prevent double-clicks
         setIsLiking(true); // Show loading state
+        if (!token) {
+            toast.error("You need to be logged in to like a post", {
+                position: "bottom-right",
+                autoClose: 5000,
+            });
+            setIsLiking(false); // Reset button state
+            return;
+        }
 
         try {
             const data = { postId: id };
