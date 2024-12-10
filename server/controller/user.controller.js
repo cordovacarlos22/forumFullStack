@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
 
 // ! CRUD OPERATIONS
@@ -59,8 +60,15 @@ const deleteUserById = async (req, res) => {
     return res.status(400).json({ message: "Invalid user ID" });
   }
   try {
-    const user = await User.findByIdAndUpdate(req.params.userId, { isActive: false }, { new: false })
+    const user = await User.findById(req.params.userId)
     if (!user) return res.status(404).json({ message: "User not found" });
+
+    const validatedPassword = await bcrypt.compare(req.body.password, user.password)
+    if (!validatedPassword) return res.status(400).json({ message: "Incorrect password" });
+
+    user.isActive = false
+    await user.save()
+
     res.status(204).json();
   } catch (error) {
     res.status(400).json({ message: "Failed to delete user ", error: error })
