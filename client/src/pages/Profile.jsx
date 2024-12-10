@@ -237,6 +237,7 @@ const Profile = () => {
             setModalOpen={setModalOpen} 
             selectedButton={selectedButton} 
             setSelectedButton={setSelectedButton}
+            user={user}
             />
           )}
         
