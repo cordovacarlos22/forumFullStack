@@ -25,11 +25,15 @@ const Modal = ({ setModalOpen, selectedButton, setSelectedButton, user }) => {
 
   const handleDeleteAccount = async (data) => {
     try {
-      const response = await deleteUserByPassword(data.password, user._id, token)
+      const response = await deleteUserByPassword(
+        data.password,
+        user._id,
+        token
+      );
 
       if (response.status === 204) {
         toast.success("Account deleted successfully");
-        setModalOpen(false)
+        setModalOpen(false);
         setSelectedButton("overview");
         logout();
         navigate("/");
@@ -37,9 +41,9 @@ const Modal = ({ setModalOpen, selectedButton, setSelectedButton, user }) => {
         toast.error("Incorrect password");
       }
     } catch (error) {
-      toast.error('Error ocurred while deleting account');
+      toast.error("Error ocurred while deleting account");
     }
-  }
+  };
 
   return (
     <>
@@ -54,16 +58,18 @@ const Modal = ({ setModalOpen, selectedButton, setSelectedButton, user }) => {
 
             {/* Formulario */}
             <form onSubmit={handleSubmit(handleDeleteAccount)}>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
+              <label className="block mb-2 text-m font-medium text-white pt-3">
                 Password
               </label>
               <input
                 type="password"
-                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4"
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
                 {...register("password")}
               />
               {errors.password && (
-                <span className="text-red-500 text-sm">{errors.password.message}</span>
+                <span className="text-red-500 text-sm">
+                  {errors.password.message}
+                </span>
               )}
 
               {/* Botones */}
@@ -94,19 +100,149 @@ const Modal = ({ setModalOpen, selectedButton, setSelectedButton, user }) => {
         <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-gray-800 text-white rounded-lg shadow-lg p-6 w-96">
             <h2 className="text-lg font-bold mb-4 text-center">Edit Profile</h2>
-            <p className="mb-2 text-center">
-              Functionality under construction.
-            </p>
-            <button
-              type="button"
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              onClick={() => {
-                setModalOpen(false);
-                setSelectedButton("overview");
-              }}
-            >
-              Close
-            </button>
+            <form>
+              <label className="block mb-2 text-m font-medium text-white pt-3">
+                First Name
+              </label>
+              <input
+                type="text"
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
+                {...register("firstName")}
+              />
+              {errors.firstName && (
+                <span className="text-red-500 text-sm">
+                  {errors.firstName.message}
+                </span>
+              )}
+              <label className="block mb-2 text-m font-medium text-white pt-3">
+                Last Name
+              </label>
+              <input
+                type="text"
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
+                {...register("lasttName")}
+              />
+              {errors.lastName && (
+                <span className="text-red-500 text-sm">
+                  {errors.lastName.message}
+                </span>
+              )}
+              <label className="block mb-2 text-m font-medium text-white pt-3">
+                Email
+              </label>
+              <input
+                type="email"
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
+                {...register("email")}
+              />
+              {errors.email && (
+                <span className="text-red-500 text-sm">
+                  {errors.email.message}
+                </span>
+              )}
+              <label className="block mb-2 text-m font-medium text-white pt-3">
+                Bio
+              </label>
+              <textarea
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
+                {...register("bio")}
+              />
+              {errors.bio && (
+                <span className="text-red-500 text-sm">
+                  {errors.bio.message}
+                </span>
+              )}
+              <label className="block mb-2 text-m font-medium text-white pt-3">
+                Avatar URL
+              </label>
+              <input
+                type="text"
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
+                {...register("avatarUrl")}
+              />
+              {errors.avatarUrl && (
+                <span className="text-red-500 text-sm">
+                  {errors.avatarUrl.message}
+                </span>
+              )}
+
+              <div className="flex justify-end space-x-3">
+                <button
+                  type="button"
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+                  onClick={() => {
+                    setModalOpen(false);
+                    setSelectedButton("overview");
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Confirm
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {selectedButton === "password" && (
+        <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-gray-800 text-white rounded-lg shadow-lg p-6 w-96">
+            <h2 className="text-lg font-bold mb-4 text-center">
+              Change Password
+            </h2>
+            <form>
+              <label className="block mb-2 text-m font-medium text-white pt-3">
+                Current Password
+              </label>
+              <input
+                type="password"
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
+                {...register("password")}
+              />
+              {errors.password && (
+                <span className="text-red-500 text-sm">
+                  {errors.password.message}
+                </span>
+              )}
+
+              <label className="block mb-2 text-m font-medium text-white pt-3">
+                 New Password
+              </label>
+              <input
+                type="password"
+                className="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 mb-4 text-black"
+                autoComplete="off"
+                {...register("password")}
+              />
+              {errors.password && (
+                <span className="text-red-500 text-sm">
+                  {errors.password.message}
+                </span>
+              )}
+              <div className="flex justify-end space-x-3">
+                <button
+                  type="button"
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+                  onClick={() => {
+                    setModalOpen(false);
+                    setSelectedButton("overview");
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Confirm
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
