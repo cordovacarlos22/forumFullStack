@@ -15,15 +15,12 @@ const Home = () => {
         <LoadingSpinner />
       </article>
     ) : (
-      <div
-        className="flex"
-      >
+      <div className="flex">
         {/* Aside Section */}
-
         <Aside />
 
         {/* Main Content */}
-        <main className=" min-h-screen flex-1 text-white flex flex-col bg-gray-900 mt-8 justify-center items-center">
+        <main className="min-h-screen flex-1 text-white flex flex-col bg-gray-900 mt-8 justify-center items-center">
           {/* Header */}
           <header className="p-4">
             <h1 className="text-2xl font-bold">Home</h1>
@@ -51,12 +48,13 @@ const Home = () => {
                     title={post.title}
                     forum={forum.title}
                     content={post.content}
-                    postImage={post.image[0]}
+                    postImage={post.image[0]} // Assuming the first image is displayed
+                    likesCount={post.likes.length} // Pass the length of the likes array
                   />
                 ))
               )
             ) : (
-              <main className=" flex justify-center items-center h-screen">
+              <main className="flex justify-center items-center h-screen">
                 <p>No forums or posts available for this category</p>
                 <Aside />
               </main>

@@ -3,6 +3,8 @@ import { useAuthContext } from "../hooks/useAuth";
 import { useEffect, useState, useContext } from "react";
 import { getMyUserService } from "../services/user.service";
 import { ForumContext } from "../context/forum.context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Nav = () => {
   const { autenticated, logout, userPayload } = useAuthContext();
@@ -28,6 +30,21 @@ const Nav = () => {
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
+
+  const handleLogout = () => {
+    logout();
+    toast.success("You have been logged out!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+   }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -119,7 +136,7 @@ const Nav = () => {
             <div className="flex items-center space-x-4 mt-4 sm:mt-0">
               {autenticated ? (
                 <>
-                  <NavLink to="/" onClick={logout}>
+                  <NavLink to="/" onClick={handleLogout}>
                     <button className="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 font-medium rounded-lg text-sm px-4 py-2">
                       Logout
                     </button>
@@ -146,6 +163,7 @@ const Nav = () => {
         </div>
       </nav>
       <Outlet />
+      <ToastContainer/>
     </>
   );
 };
