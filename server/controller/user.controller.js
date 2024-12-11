@@ -49,16 +49,37 @@ const updateUserById = async (req, res) => {
     return res.status(400).json({ message: "Invalid user ID" });
   }
 
+  const user = await User.findById(req.params.userId);
+  
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  const CurrentPassword = req.body.CurrentPassword;
+  
+  if (!CurrentPassword) {
+    return res.status(400).json({ message: "Your current password is required" });
+  }
+
   try {
-    const user = await User.findByIdAndUpdate(req.params.userId, req.body, {
+    const validatedPassword = await bcrypt.compare(
+      CurrentPassword, // Cambié aquí para usar la variable correctamente
+      user.password
+    );
+
+    if (!validatedPassword)
+      return res.status(400).json({ message: "Incorrect password" });
+
+    const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, {
       new: true,
     });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.status(200).json(user);
+
+    if (!updatedUser) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(400).json({ message: "Failed to update user ", error: error });
+    res.status(400).json({ message: "Failed to update user", error: error });
   }
 };
+
 
 const updateUserPassword = async (req, res) => {
   if (!req.params.userId.match(/^[0-9a-fA-F]{24}$/)) {
