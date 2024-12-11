@@ -22,14 +22,11 @@ const Home = () => {
         {/* Main Content */}
         <main className="min-h-screen flex-1 text-white flex flex-col bg-gray-900 mt-8 justify-center items-center">
           {/* Header */}
-          <header className="p-4">
-            <h1 className="text-2xl font-bold">Home</h1>
-          </header>
 
           {/* User Info */}
           <section className="p-4">
             {autenticated && (
-              <div>
+              <div className="flex justify-center items-center pt-6">
                 <h2>
                   Welcome, {userPayload.firstName} {userPayload.lastName}
                 </h2>
