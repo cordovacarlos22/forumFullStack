@@ -78,7 +78,7 @@ const Chat = ({ isOpen, onClose }) => {
 
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 text-gray-500 bg-blue-800 rounded-full px-2 py-1"
+            className="absolute top-2 right-2 text-gray-500 bg-blue-800 rounded-full px-2 py-1 hover:bg-blue-600"
           >
             Close chat
           </button>
