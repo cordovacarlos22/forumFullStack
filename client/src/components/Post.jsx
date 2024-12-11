@@ -2,87 +2,84 @@ import { Link } from "react-router-dom";
 import { toggleLike } from "../services/like.service";
 import { useEffect, useState } from "react";
 import { socket } from "../utils/socket"; // Import socket instance
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+ 
 function Post({ id, title, content, postImage, likesCount }) {
     const [like, setLike] = useState(likesCount); // Local state for likes
     const [isLiking, setIsLiking] = useState(false); // For button feedback
 
-
+    // WebSocket setup to listen for real-time updates
     useEffect(() => {
-
         if (!socket.connected) {
             socket.connect(); // Explicitly connect if not already connected
         }
 
-        setLike(likesCount); // Sync initial likesCount from props
-    }, [likesCount]);
-
-    useEffect(() => {
-        // Listen for real-time like updates for this specific post
-        socket.on("likeUpdated", ({ postId, newLikesCount }) => {
+        const handleLikeUpdated = ({ postId, newLikesCount }) => {
             if (postId === id) {
-                setLike(newLikesCount); // Update the like count if it's for this post
+                setLike(newLikesCount); // Update like count for this post
             }
-        });
+        };
 
-        // Cleanup the event listener on unmount
+        socket.on("likeUpdated", handleLikeUpdated);
+
         return () => {
-            socket.off("likeUpdated");
+            socket.off("likeUpdated", handleLikeUpdated); // Cleanup listener on unmount
         };
     }, [id]);
 
+    // Handle the like button click
     const handleLike = async () => {
         const token = localStorage.getItem("token");
         if (isLiking) return; // Prevent double-clicks
-        setIsLiking(true); // Show loading state
+        setIsLiking(true);
+
         if (!token) {
             toast.error("You need to be logged in to like a post", {
                 position: "bottom-right",
                 autoClose: 5000,
             });
-            setIsLiking(false); // Reset button state
+            setIsLiking(false);
             return;
         }
+
+        const updatedLikes = like + (like === likesCount ? 1 : -1); // Optimistically update like count
+        setLike(updatedLikes);
 
         try {
             const data = { postId: id };
             const response = await toggleLike(data, token);
 
-            if (response.status === 201) {
-                const updatedLikes = like + 1;
-                setLike(updatedLikes); // Increment likes locally
-                socket.emit("like-toggled", { postId: id, newLikesCount: updatedLikes }); // Notify the server
-                toast.success(" you have liked the post !", {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-            } else if (response.status === 200) {
-                const updatedLikes = like - 1;
-                setLike(updatedLikes); // Decrement likes locally
-                socket.emit("like-toggled", { postId: id, newLikesCount: updatedLikes }); // Notify the server
-                toast.info(" you have disliked the post !", {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+            if (response.status === 201 || response.status === 200) {
+                socket.emit("like-toggled", { postId: id, newLikesCount: updatedLikes }); // Notify server
+                toast.success(
+                    response.status === 201
+                        ? "You have liked the post!"
+                        : "You have disliked the post!",
+                    {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    }
+                );
+            } else {
+                setLike(like); // Rollback like count on failure
+                throw new Error("Failed to toggle like");
             }
         } catch (error) {
             console.error("Error toggling like:", error);
+            setLike(like); // Rollback like count on error
+            toast.error("An error occurred while toggling the like. Please try again.", {
+                position: "bottom-right",
+                autoClose: 5000,
+            });
         } finally {
-            setIsLiking(false); // Reset button state
+            setIsLiking(false);
         }
     };
 
@@ -119,7 +116,8 @@ function Post({ id, title, content, postImage, likesCount }) {
                                 <button
                                     onClick={handleLike}
                                     disabled={isLiking}
-                                    className={`w-8 h-8 text-white ${isLiking ? "opacity-50 cursor-not-allowed" : "hover:text-orange-600"}`}
+                                    className={`w-8 h-8 text-white ${isLiking ? "opacity-50 cursor-not-allowed" : "hover:text-orange-600"
+                                        }`}
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +136,7 @@ function Post({ id, title, content, postImage, likesCount }) {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
+            {/* <ToastContainer /> */}
         </section>
     );
 }

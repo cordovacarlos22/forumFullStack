@@ -3,8 +3,8 @@ import { useAuthContext } from "../hooks/useAuth";
 import { useEffect, useState, useContext } from "react";
 import { getMyUserService } from "../services/user.service";
 import { ForumContext } from "../context/forum.context";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Nav = () => {
   const { autenticated, logout, userPayload } = useAuthContext();
@@ -44,7 +44,7 @@ const Nav = () => {
       theme: "light",
     });
 
-   }
+  }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -68,7 +68,7 @@ const Nav = () => {
   return (
     <>
       <nav className="relative bg-gray-900 z-50">
-        <div className="fixed z-50 flex top-0 justify-between items-center p-4 w-full bg-gray-900 border-b border-gray-800">
+        <div className="fixed z-50 flex top-0 justify-between items-center m-1 w-full bg-gray-900 border-b border-gray-800">
           {/* Logo */}
           <Link to="/" className="flex  items-center space-x-3">
             <svg
@@ -162,8 +162,8 @@ const Nav = () => {
           </div>
         </div>
       </nav>
+      {/* <ToastContainer /> */}
       <Outlet />
-      <ToastContainer/>
     </>
   );
 };

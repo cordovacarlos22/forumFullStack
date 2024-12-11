@@ -12,7 +12,8 @@ userRoutes.post('/user/register', userAuth.register); // register user
 userRoutes.post('/user/login', userAuth.login); // login user 
 userRoutes.get('/user',isAuth, userController.getAllUser); /* HECTOR --  desprotegi la ruta pero condicione la peticion del controlador para dar una respuesta si eres admin o user */
 userRoutes.get('/user/:userId',isAuth, userController.getUserById); /* HECTOR --  desprotegi la ruta pero condicione la peticion del controlador para dar una respuesta si eres admin o user */
-userRoutes.patch('/user/:userId', isAuth, isTheSameUser, userController.updateUserById) // update user by id 
-userRoutes.delete('/user/:userId', isAuth,isAdmin, userController.deleteUserById) // update user by id 
+userRoutes.patch('/user/:userId', isAuth, isTheSameUser, userController.updateUserById) // update user by id
+userRoutes.put('/user/:userId', isAuth, isTheSameUser, userController.updateUserPassword) // update user by id 
+userRoutes.delete('/user/:userId', isAuth, isTheSameUser, userController.deleteUserById) // delete user by id 
 
 export default userRoutes;

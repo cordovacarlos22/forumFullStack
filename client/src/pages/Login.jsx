@@ -52,7 +52,7 @@ const Login = () => {
         });
 
         setTimeout(() => {
-          navigate("/");
+            navigate("/");
         }, 2000);
       }
     } catch (error) {
@@ -155,7 +155,7 @@ const Login = () => {
             </div>
         </section>
         </>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </div>
     </>
   );
