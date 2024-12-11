@@ -80,47 +80,50 @@ const Form = ({ isConnected }) => {
 
       {isConnected ? (
         <>
-          <form
-            className='flex flex-col gap-4'
-            onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <label htmlFor="room" className="text-white">
+        Room:
+        <select
+          name="room"
+          id="room"
+          value={room}
+          className="block w-full mt-1 p-2 bg-gray-600 text-white rounded-md"
+          onChange={(e) => setRoom(e.target.value)}
+        >
+          <option value="" disabled>Select a room</option>
+          {rooms.map((room, index) => (
+            <option key={index} value={`room ${room}`}>
+              {room}
+            </option>
+          ))}
+        </select>
+      </label>
 
-            <label htmlFor="room">Room:
+      <button
+        className={`bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 disabled:opacity-50`}
+        type="button"
+        onClick={joinRoom}
+        disabled={!room}
+      >
+        Join Room
+      </button>
 
+      <input
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        type="text"
+        name="message"
+        placeholder="Enter your message"
+        className="p-2 bg-gray-600 text-white rounded-md"
+      />
 
-              <select
-                name="room"
-                id="room"
-                value={room}
-                default=''
-                onChange={(e) => setRoom(e.target.value)}
-              >
-                <option value="" disabled>Select a room</option>
-                {rooms.map((room,index) => (
-                  <option key={index} value={`room  ${room}`}>
-                    {room}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button
-              className='bg-blue-500'
-              type="button"
-              onClick={joinRoom}
-              disabled={!room}>Join Room</button>
-            <input
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              type="text"
-              name="message"
-              placeholder='Enter  your message:'
-            />
-
-            <button
-              // disabled={isloading || !room}
-              type="submit"
-
-            >Send</button>
-          </form>
+      <button
+        className="bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
+        type="submit"
+      >
+        Send
+      </button>
+    </form>
           <ToastContainer />
         </>
       ) : null}
