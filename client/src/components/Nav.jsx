@@ -51,7 +51,7 @@ const Nav = () => {
   return (
     <>
       <nav className="relative bg-gray-900 z-50">
-        <div className="fixed z-50 flex top-0 justify-between items-center p-4 w-full bg-gray-900 border-b border-gray-800">
+        <div className="fixed z-50 flex top-0 justify-between items-center m-1 w-full bg-gray-900 border-b border-gray-800">
           {/* Logo */}
           <Link to="/" className="flex  items-center space-x-3">
             <svg
