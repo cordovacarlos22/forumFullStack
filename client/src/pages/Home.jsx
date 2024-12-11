@@ -1,13 +1,25 @@
 import { useAuthContext } from "../hooks/useAuth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ForumContext } from "../context/forum.context";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
 import LoadingSpinner from "../components/LoadingSpinner";
+import ChatBubble from "../components/chatBubble";
+import Chat from "../components/Chat";
+
 
 const Home = () => {
   const { userPayload, autenticated } = useAuthContext();
   const { filteredForums, loading } = useContext(ForumContext);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleChatButton = () => {
+    setIsChatOpen(true);
+  }
+  
+  const handleChatClose = () => {
+    setIsChatOpen(false);
+  }
 
   return (
     loading ? (
@@ -26,14 +38,17 @@ const Home = () => {
           {/* User Info */}
           <section className="p-4">
             {autenticated && (
-              <div className="flex justify-center items-center pt-6">
+              <div className="flex justify-center items-center pt-10">
                 <h2>
                   Welcome, {userPayload.firstName} {userPayload.lastName}
                 </h2>
+                <ChatBubble onclick={handleChatButton} />
+                <Chat isOpen={isChatOpen} onClose={handleChatClose} />
               </div>
+            
+            
             )}
           </section>
-
           {/* Forum Posts */}
           <section className="p-4 space-y-4">
             {filteredForums.length > 0 ? (
