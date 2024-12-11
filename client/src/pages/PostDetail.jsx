@@ -20,7 +20,7 @@ const PostDetail = () => {
   
 
   return (
-    <div className="bg-gray-900 flex flex-col items-center justify-center h-screen w-screen">
+    <div className="bg-gray-900 flex flex-col items-center justify-center min-h-full w-full mt-4">
       <h1 className=" text-white ">
         Post {id}
         
@@ -42,25 +42,25 @@ const PostDetail = () => {
             Post not found.
           </p>
         )}
-
-        <div>
-        {postComents && postComents.length > 0 && (
-          postComents.map((comment) =>
-            comment.content.map((eachContent, index) => (
-            <Coment
-              key={`${comment._id} ${index}`}
-              comentId={comment.userId._id}
-              content={eachContent}
-              firstName={comment.userId.firstName}
-              lastName={comment.userId.lastName}
-              avatar={comment.userId.avatar}
-            />
-          ))
-        )
-        )}
-
-        </div>
-    </div>
+        
+        <div className=""> 
+          {postComents && postComents.length > 0 ? 
+          ( postComents.map((comment) => 
+            comment.content.map((eachContent, index) => 
+              ( <Coment key={`${comment._id} ${index}`} 
+                comentId={comment.userId._id} content={eachContent}
+                firstName={comment.userId.firstName} 
+                lastName={comment.userId.lastName} 
+                avatar={comment.userId.avatar} /> 
+              )
+            ) 
+          ) 
+        ) :
+         ( <p className="h-screen text-gray-400 flex justify-center mt-8">No comments.</p> )
+         }
+         </div> 
+       </div>
+         
   );
 };
 
