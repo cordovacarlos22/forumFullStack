@@ -104,11 +104,13 @@ function Post({ id, title, content, postImage, likesCount }) {
                                 </div>
                             </div>
                             <div className="flex items-center justify-center mt-6">
-                                <img
-                                    className="w-full max-w-lg h-auto object-cover rounded-lg shadow-md"
-                                    src={postImage}
-                                    alt={title}
-                                />
+                                {postImage ? (<>
+                                    <img
+                                        className="w-full max-w-lg h-auto object-cover rounded-lg shadow-md"
+                                        src={postImage}
+                                        alt={title}
+                                    />
+                                </>): null }
                             </div>
                         </Link>
                         <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
