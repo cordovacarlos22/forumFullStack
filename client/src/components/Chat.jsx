@@ -51,7 +51,7 @@ const Chat = ({ isOpen, onClose }) => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <aside className="fixed top-[4.5rem] right-0 bg-gray-800 rounded-lg mx-4 mt-10 p-6 flex flex-col w-full max-w-md min-h-[500px] shadow-lg z-50">
+        <aside className="fixed top-[4.5rem] right-0 bg-gray-800 rounded-lg mx-4 mt-10 p-6 flex flex-col w-full max-w-md min-h-auto shadow-lg z-50 ">
           <header className="text-center mb-4">
             <h1 className="font-bold text-xl uppercase text-white">
               Forums Chat
