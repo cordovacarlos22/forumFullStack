@@ -53,7 +53,7 @@ const Profile = () => {
   return (
     <div className="md:flex w-screen min-h-screen bg-gray-900">
       {/* Aside Section */}
-      <aside className="min-h-screen w-64 bg-gray-800">
+      <aside className="min-h-screen w-64 bg-gray-800 mt-4">
         <Aside />
       </aside>
 
