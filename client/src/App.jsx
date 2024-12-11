@@ -17,6 +17,7 @@ import PostDetail from "./pages/PostDetail";
 import CreateForum from "./pages/CreateForum";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,8 +27,18 @@ function App() {
       errorElement: <ErrorPage />,
       children: [
         { path: "/", element: <Home /> },
-        { path: "/login", element: <Login /> },
-        { path: "/register", element: <Register /> },
+        {
+          path: "/login", element:
+            <ProtectedRoute>
+              <Login />
+            </ProtectedRoute>
+        },
+        {
+          path: "/register", element:
+            <ProtectedRoute>
+              <Register />
+            </ProtectedRoute>
+        },
         { path: "/chat", element: <Chat /> },
         { path: "/profile/:userId", element: <Profile /> },
         { path: "/createpost", element: <CreatePosts /> },
