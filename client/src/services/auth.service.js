@@ -31,5 +31,34 @@ const updateUserPassword = (data, userId, token) => {
   );
 };
 
+const updateUserInfo = (data, userId, token) => {
+  
+  return axios.patch(
+    `${mainUrl}/user/${userId}`, 
+    {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    bio: data.bio,
+    avatar: data.avatarUrl,
+    CurrentPassword: data.password
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+)
+.catch((error) => {
+  if (error.response) {
+    console.error('Backend error response:', error.response.data);
+  } else if (error.request) {
+    console.error('No response received:', error.request);
+  } else {
+    console.error('Error during request setup:', error.message);
+  }
+});
+}
 
-export { userLogin, userRegister, deleteUserByPassword, updateUserPassword };
+
+export { userLogin, userRegister, deleteUserByPassword, updateUserPassword, updateUserInfo };
