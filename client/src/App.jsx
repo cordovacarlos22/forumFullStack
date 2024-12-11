@@ -15,13 +15,14 @@ import PostsComents from "./components/PostsComents";
 import CreatePosts from "./pages/CreatePost";
 import PostDetail from "./pages/PostDetail";
 import CreateForum from "./pages/CreateForum";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Nav></Nav>,
-
+      element: <Nav />,
       errorElement: <ErrorPage />,
       children: [
         { path: "/", element: <Home /> },
@@ -29,14 +30,9 @@ function App() {
         { path: "/register", element: <Register /> },
         { path: "/chat", element: <Chat /> },
         { path: "/profile/:userId", element: <Profile /> },
-        { path: '/createpost', element: <CreatePosts /> },
-        { path: '/createforum', element: <CreateForum /> },
-        { path: '/post/:id', element: <PostDetail /> },
-        /*  ,
-        { path: '/PostsProfile', element: <PostsProfile /> },
-    /*  { path: '/CreatePosts', element: <CreatePosts /> },
-        { path: '/PostsProfile', element: <PostsProfile /> },
-        { path: '/Profile', element: <Profile /> }, */
+        { path: "/createpost", element: <CreatePosts /> },
+        { path: "/createforum", element: <CreateForum /> },
+        { path: "/post/:id", element: <PostDetail /> },
         { path: "/PostsComments", element: <PostsComents /> },
       ],
     },
@@ -44,11 +40,16 @@ function App() {
 
   return (
     <>
+      {/* Global ToastContainer */}
+      <ToastContainer />
+
+      {/* Context Providers */}
       <AuthProvider>
         <UsersProvider>
           <ComentProvider>
             <PostProvider>
               <ForumProvider>
+                {/* Router */}
                 <RouterProvider router={router} />
               </ForumProvider>
             </PostProvider>
@@ -58,4 +59,5 @@ function App() {
     </>
   );
 }
+
 export default App;
