@@ -4,7 +4,7 @@ import { ForumContext } from "../context/forum.context";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
 import LoadingSpinner from "../components/LoadingSpinner";
-import ChatBubble from "../components/chatBubble";
+import ChatBubble from "../components/ChatBubble";
 import Chat from "../components/Chat";
 
 const Home = () => {
