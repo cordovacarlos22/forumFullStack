@@ -4,11 +4,41 @@ import { useEffect, useState } from "react";
 import { socket } from "../utils/socket"; // Import socket instance
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import shareIcon from '../assets/shareIcon.svg'
 
 function Post({ id, title, content, postImage, likesCount, comentsCount }) {
   const [like, setLike] = useState(likesCount); // Local state for likes
   const [isLiking, setIsLiking] = useState(false); // For button feedback
+  const [share, setShare] = useState(false)
   const navigate = useNavigate();
+
+  function copy() {
+    const postUrl = `${window.location.origin}/post/${id}`; // URL específica del post
+    navigator.clipboard
+      .writeText(postUrl)
+      .then(() => {
+        console.log('URL copiada al portapapeles:', postUrl);
+        toast.success("Post URL copied to clipboard!", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      })
+      .catch(err => {
+        console.error('Error al copiar la URL: ', err);
+        toast.error("Failed to copy URL. Please try again.", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      });
+  }
+
+  useEffect(() => {
+    if (share === true) {
+      setTimeout(() => {
+        setShare(false);
+      }, 3000);
+    }
+  }, [share]);
 
   // WebSocket setup to listen for real-time updates
   useEffect(() => {
@@ -170,6 +200,13 @@ function Post({ id, title, content, postImage, likesCount, comentsCount }) {
                 ): (
                     <h1 className="text-white">0</h1>
                 )}
+              <button
+               type="button"
+               className="flex items-center space-x-2 text-white hover:text-orange-600"
+               onClick={() => { copy() } }>
+                <img src={shareIcon} alt="Share" className="w-6 h-6" />
+                Share
+              </button>
               </div>
             </div>
           </div>
