@@ -1,23 +1,24 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ErrorPage from "./pages/Errorpage";
+import Nav from "./components/Nav";
+import Forums from "./pages/Forums";
 import Chat from "./components/Chat";
 import Profile from "./pages/Profile";
-import { AuthProvider } from "./context/authContext";
-import { UsersProvider } from "./context/users.context";
-import { PostProvider } from "./context/postContext";
-import { ForumProvider } from "./context/forum.context";
-import { ComentProvider } from "./context/comments.context";
-import PostsComents from "./components/PostsComents";
-import CreatePosts from "./pages/CreatePost";
+import Register from "./pages/Register";
+import ErrorPage from "./pages/Errorpage";
 import PostDetail from "./pages/PostDetail";
+import CreatePosts from "./pages/CreatePost";
 import CreateForum from "./pages/CreateForum";
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { PostProvider } from "./context/postContext";
+import { AuthProvider } from "./context/authContext";
+import PostsComents from "./components/PostsComents";
+import { UsersProvider } from "./context/users.context";
+import { ForumProvider } from "./context/forum.context";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { ComentProvider } from "./context/comments.context";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
   const router = createBrowserRouter([
@@ -45,6 +46,8 @@ function App() {
         { path: "/createforum", element: <CreateForum /> },
         { path: "/post/:id", element: <PostDetail /> },
         { path: "/PostsComments", element: <PostsComents /> },
+        { path: "/forum/", element: <Forums /> },
+        /* { path: "/forum/:id", element: <ForumPage /> } */
       ],
     },
   ]);
