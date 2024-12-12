@@ -74,6 +74,13 @@ const Profile = () => {
             />
             <p className="font-bold">{user.firstName}</p>
             <p className="font-bold">{user.email}</p>
+            <div className="pl-10">
+            {user.bio ? (
+              <h1 className="text-l">{user.bio}</h1>
+            ) : (
+              <h1 className="text-l">No bio available</h1>
+            )}
+            </div>
           </div>
         </section>
 
@@ -175,11 +182,11 @@ const Profile = () => {
                   ))
                 ) : myProfile ? (
                   <p className="text-gray-400 flex justify-center mt-8">
-                    You haven't comented anything yet.
+                    You haven&apos;t comented anything yet.
                   </p>
                 ) : (
                   <p className="text-gray-400 flex justify-center mt-8">
-                    {user.firstName} hasn't comented yet.
+                    {user.firstName} hasn&apos;t comented yet.
                   </p>
                 )}
               </Overview>
@@ -204,11 +211,11 @@ const Profile = () => {
                 ))
               ) : myProfile ? (
                 <p className="text-gray-400 flex justify-center mt-8">
-                  You haven't posted anything yet.
+                  You haven&apos;t posted anything yet.
                 </p>
               ) : (
                 <p className="text-gray-400 flex justify-center mt-8">
-                  {user.firstName} hasn't posted yet.
+                  {user.firstName} hasn&apos;t posted yet.
                 </p>
               )}
             </div>
@@ -230,11 +237,11 @@ const Profile = () => {
                 ))
               ) : myProfile ? (
                 <p className="text-gray-400 flex justify-center mt-8">
-                  You haven't commented anything yet.
+                  You haven&apos;t commented anything yet.
                 </p>
               ) : (
                 <p className="text-gray-400 flex justify-center mt-8">
-                  {user.firstName} hasn't commented yet.
+                  {user.firstName} hasn&apos;t commented yet.
                 </p>
               )}
             </div>
