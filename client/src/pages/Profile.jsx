@@ -53,7 +53,7 @@ const Profile = () => {
   return (
     <div className="md:flex w-screen min-h-screen bg-gray-900">
       {/* Aside Section */}
-      <aside className="min-h-screen w-64 bg-gray-800 mt-4">
+      <aside className="min-h-screen w-64 bg-gray-800">
         <Aside />
       </aside>
 
@@ -65,7 +65,7 @@ const Profile = () => {
         </header>
 
         {/* User Info */}
-        <section className="p-4">
+        <section className="pt-6 pl-6">
           <div className="flex items-center space-x-4">
             <img
               src={user.avatar}
