@@ -5,7 +5,6 @@ import ForumCard from "../components/ForumCard";
 
 const Forums = () => {
   const { forums } = useContext(ForumContext);
-  console.log("foros", forums);
 
   return (
     <div className="flex">
@@ -19,6 +18,7 @@ const Forums = () => {
             {forums.map((forum) => (
               <ForumCard
                 key={forum._id}
+                id={forum._id}
                 title={forum.title}
                 description={forum.description}
                 className="bg-white rounded-lg shadow-md"

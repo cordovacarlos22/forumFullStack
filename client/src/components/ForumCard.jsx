@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 const ForumCard = ({id, title, description}) => {
+  
   return (
     <Link
      to={`/forum/${id}`}
