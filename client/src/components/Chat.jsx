@@ -11,6 +11,7 @@ import { ForumContext } from "../context/forum.context";
 import LoadingSpinner from "./LoadingSpinner";
 
 const Chat = ({ isOpen, onClose }) => {
+  
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [events, setEvents] = useState([]);
 
