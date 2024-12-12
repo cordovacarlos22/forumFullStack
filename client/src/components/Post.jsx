@@ -17,14 +17,12 @@ function Post({ id, title, content, postImage, likesCount, comentsCount }) {
     navigator.clipboard
       .writeText(postUrl)
       .then(() => {
-        console.log('URL copiada al portapapeles:', postUrl);
         toast.success("Post URL copied to clipboard!", {
           position: "bottom-right",
           autoClose: 3000,
         });
       })
       .catch(err => {
-        console.error('Error al copiar la URL: ', err);
         toast.error("Failed to copy URL. Please try again.", {
           position: "bottom-right",
           autoClose: 3000,
