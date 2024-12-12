@@ -27,8 +27,8 @@ const ForumPage = () => {
               <section className="py-8 antialiased bg-gray-900 md:py-16">
                 <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
                   <div className="w-full h-full">
-                    <div className="p-6 sm:p-8 md:p-10 lg:p-12 rounded-xl border-2 border-stone-200">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                    <div className="p-6 sm:p-8 md:p-10 lg:p-12 rounded-xl ">
+                      <div className="flex flex-col md:flex-col md:items-center md:justify-between space-y-4 md:space-y-0">
                         <div className="flex items-center space-x-3">
                           <img
                             className="w-10 h-10 rounded-full"
@@ -39,7 +39,7 @@ const ForumPage = () => {
                             {forum.title} Forum
                           </p>
                         </div>
-                        <div className="text-center md:text-left">
+                        <div className="text-center md:text-end">
                           <h1 className="text-xl font-semibold text-white">
                             {/* {title} */}
                           </h1>

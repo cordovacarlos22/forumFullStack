@@ -22,7 +22,7 @@ const Aside = () => {
         {/* Toggle Button */}
         <button
           onClick={toggleSidebar}
-          className="fixed top-28 md:top-36 lg:top-28 left-4 z-10 p-3 bg-gray-800 text-white rounded focus:outline-none"
+          className="fixed top-28 md:top-36 lg:top-28 left-4 z-10 p-3 bg-gray-800 border border-blue-600 text-white rounded focus:outline-none"
           aria-label="Toggle Sidebar"
         >
           {isSidebarOpen ? "Close" : "Menu"}
