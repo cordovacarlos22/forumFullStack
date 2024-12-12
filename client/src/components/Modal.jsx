@@ -7,8 +7,8 @@ import {
 } from "../services/auth.service";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup
@@ -38,19 +38,28 @@ const Modal = ({ setModalOpen, selectedButton, setSelectedButton, user }) => {
     try {
       const response = await updateUserInfo(data, user._id, token)
       
-      
-
       if (response.status === 200) {
-        toast.success("Profile updated successfully, please log in again.");
+        toast.success("Profile updated successfully, please log in again.",{
+          position: "bottom-right",
+          autoclose: 3000
+        });
         setModalOpen(false);
         setSelectedButton("overview");
-        navigate(`/profile/${user._id}`);
+        setTimeout(() => {
+          logout();
+          navigate("/login");
+        }, 2000);
+      } else {
+        toast.error('Incorrect password');
       }
     } catch (error) {
       const message =
         error.response?.data?.message ||
-        "Error occurred while updating profile";
-      toast.error(message);
+        "Error occurred while updating profile: wrong password";
+      toast.error(message, {
+        position: "bottom-right",
+        autoclose: 3000
+      });
     }
   }
 
@@ -59,17 +68,25 @@ const Modal = ({ setModalOpen, selectedButton, setSelectedButton, user }) => {
       const response = await updateUserPassword(data, user._id, token);
 
       if (response.status === 200) {
-        toast.success("Password changed successfully, please log in again.");
+        toast.success("Password changed successfully, please log in again.", {
+          position: "bottom-right",
+          autoclose: 3000
+        });
         setModalOpen(false);
         setSelectedButton("overview");
         logout();
-        navigate("/login");
+        setTimeout(() => {
+          logout();
+          navigate("/login");
+        }, 2000);
+      } else {
+        toast.error("Incorrect password");
       }
     } catch (error) {
-      const message =
-        error.response?.data?.message ||
-        "Error occurred while changing password";
-      toast.error(message);
+      toast.error("Error occurred while changing password: wrong current password", {
+        position: "bottom-right",
+        autoclose: 3000
+      });
     }
   };
 
@@ -82,16 +99,24 @@ const Modal = ({ setModalOpen, selectedButton, setSelectedButton, user }) => {
       );
 
       if (response.status === 204) {
-        toast.success("Account deleted successfully");
+        toast.success("Account deleted successfully", {
+          position: "bottom-right",
+          autoclose: 3000,
+        });
         setModalOpen(false);
         setSelectedButton("overview");
-        logout();
-        navigate("/");
+        setTimeout(() => {
+          logout();
+          navigate("/");
+        }, 2000);
       } else {
         toast.error("Incorrect password");
       }
     } catch (error) {
-      toast.error("Error ocurred while deleting account");
+      toast.error("Error ocurred while deleting account: wrong password", {
+        position: "bottom-right",
+        autoclose: 3000,
+      });
     }
   };
 
