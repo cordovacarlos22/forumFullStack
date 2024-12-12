@@ -65,7 +65,7 @@ const Profile = () => {
         </header>
 
         {/* User Info */}
-        <section className="p-4">
+        <section className="pt-6 pl-6">
           <div className="flex items-center space-x-4">
             <img
               src={user.avatar}
@@ -148,6 +148,7 @@ const Profile = () => {
                       }
                       content={post.content}
                       postImage={post.image[0]}
+                      comentsCount={post.comments.reduce((total, comment) => total + comment.content.length, 0)}
                     />
                   ))
                 ) : myProfile ? (
@@ -198,6 +199,7 @@ const Profile = () => {
                     }
                     content={post.content}
                     postImage={post.image[0]}
+                    comentsCount={post.comments.reduce((total, comment) => total + comment.content.length, 0)}
                   />
                 ))
               ) : myProfile ? (

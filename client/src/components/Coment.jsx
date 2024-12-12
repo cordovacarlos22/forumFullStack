@@ -2,17 +2,17 @@ const Coment = ({content, comentId, avatar, firstName, lastName}) => {
   return (
     <section
       key={comentId}
-     className=" py-8 antialiased bg-gray-900 md:py-16">
+     className=" py-8 antialiased md:py-16">
 
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0 ">
         <div className="w-full h-full">
-          <div className="mt-7 border-2  w-3/5 ml-64 p-4 rounded-xl border-gray-400">
-            <article className="p-6 text-base  rounded-lg bg-gray-900">
+          <div className="mt-1 border-2  w-4/5 ml-28 p-4 rounded-xl border-gray-400 pr-32">
+            <article className="p-6 text-base  rounded-lg bg-gray-900 ">
               <footer className="flex justify-between items-center mb-2">
                 <div className="flex items-center">
                   <p className="inline-flex items-center mr-3 text-lg text-white font-semibold">
                     <img
-                      className="mr-2 w-8 h-8 rounded-full"
+                      className="mr-2 w-8 h-8 rounded-full "
                       src={avatar}
                       alt={firstName + " " + lastName}
                     />
