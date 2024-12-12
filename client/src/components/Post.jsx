@@ -166,7 +166,7 @@ function Post({ id, title, content, postImage, likesCount, comentsCount }) {
                   </svg>
                 </button>
                 {comentsCount > 0 ? (
-                    <h1 className="text-white">{comentsCount + 1}</h1>
+                    <h1 className="text-white">{comentsCount}</h1>
                 ): (
                     <h1 className="text-white">0</h1>
                 )}

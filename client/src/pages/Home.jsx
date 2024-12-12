@@ -60,7 +60,8 @@ const Home = () => {
                   content={post.content}
                   postImage={post.image[0]} // Assuming the first image is displayed
                   likesCount={post.likes.length}
-                  comentsCount={post.comments.length} // Pass the length of the likes array
+                  comentsCount={post.comments.reduce((total, comment) => total + comment.content.length, 0)}
+ // Pass the length of the likes array
                 />
               ))
             )

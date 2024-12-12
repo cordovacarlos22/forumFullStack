@@ -148,6 +148,7 @@ const Profile = () => {
                       }
                       content={post.content}
                       postImage={post.image[0]}
+                      comentsCount={post.comments.reduce((total, comment) => total + comment.content.length, 0)}
                     />
                   ))
                 ) : myProfile ? (
@@ -198,6 +199,7 @@ const Profile = () => {
                     }
                     content={post.content}
                     postImage={post.image[0]}
+                    comentsCount={post.comments.reduce((total, comment) => total + comment.content.length, 0)}
                   />
                 ))
               ) : myProfile ? (
