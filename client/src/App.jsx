@@ -6,6 +6,7 @@ import Chat from "./components/Chat";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import ErrorPage from "./pages/Errorpage";
+import ForumPage from "./pages/ForumPage";
 import PostDetail from "./pages/PostDetail";
 import CreatePosts from "./pages/CreatePost";
 import CreateForum from "./pages/CreateForum";
@@ -47,7 +48,7 @@ function App() {
         { path: "/post/:id", element: <PostDetail /> },
         { path: "/PostsComments", element: <PostsComents /> },
         { path: "/forum/", element: <Forums /> },
-        /* { path: "/forum/:id", element: <ForumPage /> } */
+        { path: "/forum/:forumId", element: <ForumPage /> }
       ],
     },
   ]);
