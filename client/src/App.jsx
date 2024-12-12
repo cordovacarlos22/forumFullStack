@@ -47,7 +47,7 @@ function App() {
         { path: "/createforum", element: <CreateForum /> },
         { path: "/post/:id", element: <PostDetail /> },
         { path: "/PostsComments", element: <PostsComents /> },
-        { path: "/forum/", element: <Forums /> },
+        { path: "/forums/", element: <Forums /> },
         { path: "/forum/:forumId", element: <ForumPage /> }
       ],
     },

@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import { ForumContext } from "../context/forum.context";
 import { navLinksAside, navLiks } from "../utils/navLinks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Aside = () => {
   const { setSelectedCategory, selectedCategory } = useContext(ForumContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to toggle sidebar
+  const navigate = useNavigate();
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category); // Update selected category in context
@@ -38,6 +39,18 @@ const Aside = () => {
             >
               <div className="h-full px-3 py-4 overflow-y-auto">
                 <hr className="my-2 border-1 border-white  " />
+                <ul className="space-y-2 font-medium text-white mt-4">
+                  <li>
+                    <button
+                      onClick={() => navigate("/forums")}
+                      className="w-full p-2 text-left rounded bg-gray-700 hover:bg-gray-600"
+                    >
+                      See all the forums
+                    </button>
+                  </li>
+                </ul>
+                <hr className="my-2 border-1 border-white  " />
+                
                 <ul className="space-y-2 font-medium text-white mt-4">
                   <li>
                     <button
