@@ -59,7 +59,8 @@ const Home = () => {
                   forum={forum.title}
                   content={post.content}
                   postImage={post.image[0]} // Assuming the first image is displayed
-                  likesCount={post.likes.length} // Pass the length of the likes array
+                  likesCount={post.likes.length}
+                  comentsCount={post.comments.length} // Pass the length of the likes array
                 />
               ))
             )
