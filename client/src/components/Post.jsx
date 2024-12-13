@@ -76,7 +76,10 @@ function Post({ id, title, content, postImage, likesCount, comentsCount }) {
     setLike(updatedLikes);
 
     try {
-      const data = { postId: id };
+      const data = {
+        postId: id,
+        content:""
+       };
       const response = await toggleLike(data, token);
 
       if (response.status === 201 || response.status === 200) {
@@ -202,8 +205,10 @@ function Post({ id, title, content, postImage, likesCount, comentsCount }) {
                type="button"
                className="flex items-center space-x-2 text-white hover:text-orange-600"
                onClick={() => { copy() } }>
-                <img src={shareIcon} alt="Share" className="w-6 h-6" />
-                Share
+                  <img
+                    
+                    src={shareIcon} alt="Share" className="w-6 h-6 bg-gray-300 rounded-md   " />
+                <p>Share</p>
               </button>
               </div>
             </div>
