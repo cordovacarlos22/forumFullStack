@@ -14,7 +14,7 @@ const PostProvider = ({ children }) => {
                     throw new Error(`Failed to fetch posts: ${response.status} ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log('Fetched posts:', data);
+                // console.log('Fetched posts:', data);
                 setPosts(data); // Ajusta según la estructura de datos de tu API
             } catch (error) {
                 console.error('Error fetching posts:', error);

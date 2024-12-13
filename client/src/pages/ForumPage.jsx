@@ -8,10 +8,10 @@ const ForumPage = () => {
   const { forumId } = useParams();
 
   const forum = forums.find((forum) => forum._id === forumId);
-  console.log("foro param desde forumPage", forum);
+  // console.log("foro param desde forumPage", forum);
 
   const posts = forum?.posts;
-  console.log("posts desde forumPage", posts);
+  // console.log("posts desde forumPage", posts);
   
 
   return (

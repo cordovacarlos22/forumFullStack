@@ -28,7 +28,7 @@ const Chat = ({ isOpen, onClose }) => {
     };
 
     const onEvent = (data) => {
-      console.log(data);
+      
       setEvents((prev) => [...prev, data]);
     };
 

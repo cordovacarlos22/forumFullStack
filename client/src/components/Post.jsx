@@ -76,10 +76,7 @@ function Post({ id, title, content, postImage, likesCount, comentsCount }) {
     setLike(updatedLikes);
 
     try {
-      const data = {
-        postId: id,
-        content:""
-       };
+      const data = { postId: id };
       const response = await toggleLike(data, token);
 
       if (response.status === 201 || response.status === 200) {
