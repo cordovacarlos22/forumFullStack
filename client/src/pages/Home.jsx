@@ -4,7 +4,6 @@ import { ForumContext } from "../context/forum.context";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
 import LoadingSpinner from "../components/LoadingSpinner";
-import ChatBubble from "../components/ChatBubble";
 
 const Home = () => {
   const { userPayload, autenticated } = useAuthContext();
