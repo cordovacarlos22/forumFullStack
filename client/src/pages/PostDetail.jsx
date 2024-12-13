@@ -25,7 +25,7 @@ const PostDetail = () => {
 
   const forumPost = post[0];
   const postComents = forumPost?.comments;
-  console.log("post coments ", postComents);
+  // console.log("post coments ", postComents);
 
   return (
     <div className="md:flex w-screen min-h-screen bg-gray-900">
