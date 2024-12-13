@@ -1,24 +1,14 @@
 import { useAuthContext } from "../hooks/useAuth";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { ForumContext } from "../context/forum.context";
 import Post from "../components/Post";
 import Aside from "../components/Aside";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ChatBubble from "../components/ChatBubble";
-import Chat from "../components/Chat";
 
 const Home = () => {
   const { userPayload, autenticated } = useAuthContext();
   const { filteredForums, loading } = useContext(ForumContext);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-
-  const handleChatButton = () => {
-    setIsChatOpen(true);
-  };
-
-  const handleChatClose = () => {
-    setIsChatOpen(false);
-  };
 
   return loading ? (
     <article className="relative w-screen">
@@ -42,8 +32,7 @@ const Home = () => {
               <h2>
                 Welcome, {userPayload.firstName} {userPayload.lastName}
               </h2>
-              <ChatBubble onclick={handleChatButton} />
-              <Chat isOpen={isChatOpen} onClose={handleChatClose} />
+              
             </div>
           )}
         </section>

@@ -1,10 +1,10 @@
 import chatIcon from '../assets/chatIcon.svg';
 
-const ChatBubble = ({ onclick }) => {
+const ChatBubble = ({ onClick }) => {
   return (
     <button
       type="button"
-      onClick={onclick}
+      onClick={onClick}
       className="fixed bottom-4 right-4 z-50 bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
     >
       <img

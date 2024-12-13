@@ -2,11 +2,11 @@ const Coment = ({content, comentId, avatar, firstName, lastName}) => {
   return (
     <section
       key={comentId}
-     className=" py-8 antialiased md:py-16">
+     className=" pt-4 ">
 
-      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0 ">
+      <div>
         <div className="w-full h-full">
-          <div className="mt-1 border-2  w-4/5 ml-28 p-4 rounded-xl border-gray-400 pr-32">
+          <div className="mt-1 border-2  rounded-xl border-gray-400 pr-32">
             <article className="p-6 text-base  rounded-lg bg-gray-900 ">
               <footer className="flex justify-between items-center mb-2">
                 <div className="flex items-center">
