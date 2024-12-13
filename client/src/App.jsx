@@ -15,17 +15,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ChatBubble from "./components/ChatBubble";
 import { PostProvider } from "./context/postContext";
-import { AuthProvider } from "./context/authContext";
+import { AuthProvider, AuthContext } from "./context/authContext";
 import PostsComents from "./components/PostsComents";
 import { UsersProvider } from "./context/users.context";
 import { ForumProvider } from "./context/forum.context";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ComentProvider } from "./context/comments.context";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useContext } from "react";
 
-function App() {
+// Componente para manejar Chat y ChatBubble
+function ChatComponents() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  
+  const { autenticated } = useContext(AuthContext);
 
   const handleChatButton = () => {
     setIsChatOpen(true);
@@ -35,16 +37,24 @@ function App() {
     setIsChatOpen(false);
   };
 
-  /* <ChatBubble onClick={handleChatButton} />
-                <Chat isOpen={isChatOpen} onClose={handleChatClose} /> */
+  if (!autenticated) return null;
+
+  return (
+    <>
+      <ChatBubble onClick={handleChatButton} />
+      <Chat isOpen={isChatOpen} onClose={handleChatClose} />
+    </>
+  );
+}
+
+function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
         <>
           <Nav />
-          <ChatBubble onClick={handleChatButton} />
-          <Chat isOpen={isChatOpen} onClose={handleChatClose} />
+          <ChatComponents />
         </>
       ),
       errorElement: <ErrorPage />,
