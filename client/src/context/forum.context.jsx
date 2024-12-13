@@ -22,7 +22,7 @@ const ForumProvider = ({ children }) => {
                     throw new Error(`Error fetching forums: ${response.status} ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log('Fetching forums:', data);
+                // console.log('Fetching forums:', data);
                 setForums(data);
                 setLoading(false);
             } catch (error) {
@@ -35,7 +35,7 @@ const ForumProvider = ({ children }) => {
             try {
                 // Wake up the chat API
                 await fetch(`${chatApiUrl}`);
-                console.log('Chat API is awake!');
+                // console.log('Chat API is awake!');
                 setLoading(false);
             } catch (error) {
                 console.error('Failed to wake up Chat API:', error);

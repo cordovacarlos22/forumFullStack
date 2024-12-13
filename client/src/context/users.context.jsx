@@ -21,7 +21,7 @@ const UsersProvider = ({ children }) => {
                 })
                 
                 const data = await response.json()
-                console.log('Fetched users:',data);
+                // console.log('Fetched users:',data);
                 setUsers(data)
             } catch (error) {
                 console.error('Error fetching users:', error);

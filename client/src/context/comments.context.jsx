@@ -14,7 +14,7 @@ const ComentProvider = ({ children }) => {
                     throw new Error(`Failed to fetch comments: ${response.status} ${response.statusText}`)
                 }
                 const data = await response.json()
-                console.log('Fetched comments:', data);
+                // console.log('Fetched comments:', data);
                 setComents(data)
             } catch (error) {
                 console.error('Error fetching comments:', error);

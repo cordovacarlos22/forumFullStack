@@ -22,7 +22,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     //realiza una peticion con la DATA a la API para que esa info se registre como usuario
-    console.log(data);
+    // console.log(data);
 
     try {
       toast.info(' waiting for server !', {
