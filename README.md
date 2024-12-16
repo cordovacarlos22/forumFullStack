@@ -2,6 +2,7 @@
 
 ## Overview
 
+
 **ForumFullStack** is a full-stack project inspired by platforms like Reddit, where registered users can:
 
 - Create forums categorized by topics (e.g., Tech, Games, Lifestyle, Memes).
